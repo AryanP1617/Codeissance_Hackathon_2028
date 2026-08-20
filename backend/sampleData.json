@@ -1,0 +1,1822 @@
+[
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1001",
+"rawAttributes": {
+"fullName": "Aarav Sharma",
+"pan": "ABXPS1234K",
+"mobile": "+91 98765-43210",
+"email": "[aarav.sharma@gmail.com](mailto:aarav.sharma@gmail.com)",
+"city": "Mumbai",
+"dateOfBirth": "1990-04-15"
+},
+"holdingsData": {
+"accountNumber": "EQACC1001",
+"portfolioValue": 1250000,
+"activeHoldings": ["RELIANCE", "TCS", "HDFCBANK", "INFY"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1002",
+"rawAttributes": {
+"fullName": "Priya Venkatesh Nair",
+"pan": "CDQPN2345L",
+"mobile": "9820012345",
+"email": "[priya.nair@gmail.com](mailto:priya.nair@gmail.com)",
+"city": "Bengaluru",
+"dateOfBirth": "1988-07-21"
+},
+"holdingsData": {
+"accountNumber": "EQACC1002",
+"portfolioValue": 820000,
+"activeHoldings": ["INFY", "WIPRO", "ICICIBANK"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1003",
+"rawAttributes": {
+"fullName": "Rohan Mehta",
+"pan": "EFTRM3456P",
+"mobile": "9988776655",
+"email": "[rohan.mehta@gmail.com](mailto:rohan.mehta@gmail.com)",
+"city": "Pune",
+"dateOfBirth": "1985-11-03"
+},
+"holdingsData": {
+"accountNumber": "EQACC1003",
+"portfolioValue": 2100000,
+"activeHoldings": ["LT", "SBIN", "AXISBANK", "MARUTI"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1004",
+"rawAttributes": {
+"fullName": "Sneha Iyer",
+"pan": "GHYSI4567Q",
+"mobile": "9876501234",
+"email": "[sneha.iyer@gmail.com](mailto:sneha.iyer@gmail.com)",
+"city": "Chennai",
+"dateOfBirth": "1992-02-18"
+},
+"holdingsData": {
+"accountNumber": "EQACC1004",
+"portfolioValue": 650000,
+"activeHoldings": ["TCS", "HCLTECH", "ITC"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1005",
+"rawAttributes": {
+"fullName": "Vikram Desai",
+"pan": "JKLVD5678R",
+"mobile": "9811122233",
+"email": "[vikram.desai@gmail.com](mailto:vikram.desai@gmail.com)",
+"city": "Ahmedabad",
+"dateOfBirth": "1979-09-12"
+},
+"holdingsData": {
+"accountNumber": "EQACC1005",
+"portfolioValue": 1750000,
+"activeHoldings": ["ADANIENT", "HDFCBANK", "SUNPHARMA"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1006",
+"rawAttributes": {
+"fullName": "Karan Malhotra",
+"pan": "MNKPM6789S",
+"mobile": "9000011111",
+"email": "[karan.malhotra@gmail.com](mailto:karan.malhotra@gmail.com)",
+"city": "Delhi",
+"dateOfBirth": "1987-04-09"
+},
+"holdingsData": {
+"accountNumber": "EQACC1006",
+"portfolioValue": 430000,
+"activeHoldings": ["ITC", "ONGC"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1007",
+"rawAttributes": {
+"fullName": "Neha Kapoor",
+"pan": "OPQNK7890T",
+"mobile": "9111122222",
+"email": "[neha.kapoor@gmail.com](mailto:neha.kapoor@gmail.com)",
+"city": "Gurugram",
+"dateOfBirth": "1991-06-25"
+},
+"holdingsData": {
+"accountNumber": "EQACC1007",
+"portfolioValue": 980000,
+"activeHoldings": ["INFY", "TCS", "BHARTIARTL"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1008",
+"rawAttributes": {
+"fullName": "Aditya Rao",
+"pan": "QRDAR8901U",
+"mobile": "9222233333",
+"email": "[aditya.rao@gmail.com](mailto:aditya.rao@gmail.com)",
+"city": "Hyderabad",
+"dateOfBirth": "1984-12-17"
+},
+"holdingsData": {
+"accountNumber": "EQACC1008",
+"portfolioValue": 3400000,
+"activeHoldings": ["RELIANCE", "TCS", "ICICIBANK", "BAJFINANCE"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1009",
+"rawAttributes": {
+"fullName": "Meera Joshi",
+"pan": "STUMJ9012V",
+"mobile": "9333344444",
+"email": "[meera.joshi@gmail.com](mailto:meera.joshi@gmail.com)",
+"city": "Nashik",
+"dateOfBirth": "1993-03-14"
+},
+"holdingsData": {
+"accountNumber": "EQACC1009",
+"portfolioValue": 290000,
+"activeHoldings": ["HDFCBANK", "ITC"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1010",
+"rawAttributes": {
+"fullName": "Siddharth Kulkarni",
+"pan": "VWASK0123W",
+"mobile": "9444455555",
+"email": "[sid.kulkarni@gmail.com](mailto:sid.kulkarni@gmail.com)",
+"city": "Pune",
+"dateOfBirth": "1986-08-30"
+},
+"holdingsData": {
+"accountNumber": "EQACC1010",
+"portfolioValue": 5600000,
+"activeHoldings": ["RELIANCE", "LT", "TCS", "INFY", "SBIN"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1011",
+"rawAttributes": {
+"fullName": "Ananya Gupta",
+"pan": "XYANG1234X",
+"mobile": "9555566666",
+"email": "[ananya.gupta@gmail.com](mailto:ananya.gupta@gmail.com)",
+"city": "Kolkata",
+"dateOfBirth": "1994-01-11"
+},
+"holdingsData": {
+"accountNumber": "EQACC1011",
+"portfolioValue": 710000,
+"activeHoldings": ["ITC", "HINDUNILVR", "TITAN"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1012",
+"rawAttributes": {
+"fullName": "Manish Verma",
+"pan": "YZMVP2345Y",
+"mobile": "9666677777",
+"email": "[manish.verma@gmail.com](mailto:manish.verma@gmail.com)",
+"city": "Jaipur",
+"dateOfBirth": "1981-05-20"
+},
+"holdingsData": {
+"accountNumber": "EQACC1012",
+"portfolioValue": 1300000,
+"activeHoldings": ["AXISBANK", "SBIN", "MARUTI"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1013",
+"rawAttributes": {
+"fullName": "Pooja Shah",
+"pan": "ABPPS3456Z",
+"mobile": "9777788888",
+"email": "[pooja.shah@gmail.com](mailto:pooja.shah@gmail.com)",
+"city": "Surat",
+"dateOfBirth": "1990-10-06"
+},
+"holdingsData": {
+"accountNumber": "EQACC1013",
+"portfolioValue": 470000,
+"activeHoldings": ["WIPRO", "INFY"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1014",
+"rawAttributes": {
+"fullName": "Nikhil Bansal",
+"pan": "CDNBQ4567A",
+"mobile": "9888899999",
+"email": "[nikhil.bansal@gmail.com](mailto:nikhil.bansal@gmail.com)",
+"city": "Noida",
+"dateOfBirth": "1989-07-28"
+},
+"holdingsData": {
+"accountNumber": "EQACC1014",
+"portfolioValue": 890000,
+"activeHoldings": ["RELIANCE", "TATAMOTORS", "ICICIBANK"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1015",
+"rawAttributes": {
+"fullName": "Divya Menon",
+"pan": "EFDMN5678B",
+"mobile": "9000099999",
+"email": "[divya.menon@gmail.com](mailto:divya.menon@gmail.com)",
+"city": "Kochi",
+"dateOfBirth": "1995-09-19"
+},
+"holdingsData": {
+"accountNumber": "EQACC1015",
+"portfolioValue": 360000,
+"activeHoldings": ["HDFCBANK", "TITAN"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1016",
+"rawAttributes": {
+"fullName": "Rajiv Nanda",
+"pan": "GHRRN6789C",
+"mobile": "9110091100",
+"email": "[rajiv.nanda@gmail.com](mailto:rajiv.nanda@gmail.com)",
+"city": "Chandigarh",
+"dateOfBirth": "1977-03-08"
+},
+"holdingsData": {
+"accountNumber": "EQACC1016",
+"portfolioValue": 2500000,
+"activeHoldings": ["RELIANCE", "HDFCBANK", "LT"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1017",
+"rawAttributes": {
+"fullName": "Ishita Sen",
+"pan": "JKISN7890D",
+"mobile": "9220092200",
+"email": "[ishita.sen@gmail.com](mailto:ishita.sen@gmail.com)",
+"city": "Kolkata",
+"dateOfBirth": "1993-11-27"
+},
+"holdingsData": {
+"accountNumber": "EQACC1017",
+"portfolioValue": 610000,
+"activeHoldings": ["TCS", "INFY"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1018",
+"rawAttributes": {
+"fullName": "Arjun Patel",
+"pan": "MNAPX8901E",
+"mobile": "9330093300",
+"email": "[arjun.patel@gmail.com](mailto:arjun.patel@gmail.com)",
+"city": "Vadodara",
+"dateOfBirth": "1988-06-16"
+},
+"holdingsData": {
+"accountNumber": "EQACC1018",
+"portfolioValue": 1180000,
+"activeHoldings": ["ADANIPORTS", "SBIN", "AXISBANK"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1019",
+"rawAttributes": {
+"fullName": "Shreya Deshmukh",
+"pan": "OPSDQ9012F",
+"mobile": "9440094400",
+"email": "[shreya.deshmukh@gmail.com](mailto:shreya.deshmukh@gmail.com)",
+"city": "Nagpur",
+"dateOfBirth": "1996-04-23"
+},
+"holdingsData": {
+"accountNumber": "EQACC1019",
+"portfolioValue": 520000,
+"activeHoldings": ["ITC", "TITAN"]
+}
+},
+{
+"sourceSystem": "EQUITY",
+"sourceCustomerId": "EQ_1020",
+"rawAttributes": {
+"fullName": "Vivek Chatterjee",
+"pan": "QRVCW0123G",
+"mobile": "9550095500",
+"email": "[vivek.chatterjee@gmail.com](mailto:vivek.chatterjee@gmail.com)",
+"city": "Bhubaneswar",
+"dateOfBirth": "1983-12-01"
+},
+"holdingsData": {
+"accountNumber": "EQACC1020",
+"portfolioValue": 1500000,
+"activeHoldings": ["RELIANCE", "BHARTIARTL", "TCS"]
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2001",
+"rawAttributes": {
+"fullName": "Aarav S Sharma",
+"pan": "ABXPS1234K",
+"mobile": "9876543210",
+"email": "[aarav.sharma@acmecorp.in](mailto:aarav.sharma@acmecorp.in)",
+"city": "Mumbai",
+"dateOfBirth": "1990-04-15"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2001",
+"totalNavValue": 980000,
+"schemeCount": 4,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2002",
+"rawAttributes": {
+"fullName": "Rohan Mehta",
+"pan": "EFTRM3456P",
+"mobile": "+919988776655",
+"email": "[rohan.mehta@gmail.com](mailto:rohan.mehta@gmail.com)",
+"city": "Pune",
+"dateOfBirth": "1985-11-03"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2002",
+"totalNavValue": 1400000,
+"schemeCount": 5,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2003",
+"rawAttributes": {
+"fullName": "Sneha R Iyer",
+"pan": "GHYSI4567Q",
+"mobile": "9876501234",
+"email": "[sneha.iyer@gmail.com](mailto:sneha.iyer@gmail.com)",
+"city": "Chennai",
+"dateOfBirth": "1992-02-18"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2003",
+"totalNavValue": 760000,
+"schemeCount": 3,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2004",
+"rawAttributes": {
+"fullName": "Vikram Desai",
+"pan": "JKLVD5678R",
+"mobile": "9811122233",
+"email": "[vikram.desai@gmail.com](mailto:vikram.desai@gmail.com)",
+"city": "Ahmedabad",
+"dateOfBirth": "1979-09-12"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2004",
+"totalNavValue": 1950000,
+"schemeCount": 6,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2005",
+"rawAttributes": {
+"fullName": "Priya V Nair",
+"pan": null,
+"mobile": "+91 98200-12345",
+"email": "[priya.nair@gmail.com](mailto:priya.nair@gmail.com)",
+"city": "Bengaluru",
+"dateOfBirth": "1988-07-21"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2005",
+"totalNavValue": 620000,
+"schemeCount": 3,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2006",
+"rawAttributes": {
+"fullName": "Karan Malhotra",
+"pan": "MNKPM6789S",
+"mobile": "9000011111",
+"email": "[karan.malhotra@gmail.com](mailto:karan.malhotra@gmail.com)",
+"city": "Delhi",
+"dateOfBirth": "1987-04-09"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2006",
+"totalNavValue": 520000,
+"schemeCount": 2,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2007",
+"rawAttributes": {
+"fullName": "Neha Kapoor",
+"pan": "OPQNK7890T",
+"mobile": "9111122222",
+"email": "[neha.kapoor@gmail.com](mailto:neha.kapoor@gmail.com)",
+"city": "Gurugram",
+"dateOfBirth": "1991-06-25"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2007",
+"totalNavValue": 1100000,
+"schemeCount": 4,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2008",
+"rawAttributes": {
+"fullName": "Aditya Rao",
+"pan": "QRDAR8901U",
+"mobile": "9222233333",
+"email": "[aditya.rao@gmail.com](mailto:aditya.rao@gmail.com)",
+"city": "Hyderabad",
+"dateOfBirth": "1984-12-17"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2008",
+"totalNavValue": 2800000,
+"schemeCount": 7,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2009",
+"rawAttributes": {
+"fullName": "Meera Joshi",
+"pan": "STUMJ9012V",
+"mobile": "9333344444",
+"email": "[meera.joshi@gmail.com](mailto:meera.joshi@gmail.com)",
+"city": "Nashik",
+"dateOfBirth": "1993-03-14"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2009",
+"totalNavValue": 350000,
+"schemeCount": 2,
+"sipActive": false
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2010",
+"rawAttributes": {
+"fullName": "Siddharth Kulkarni",
+"pan": "VWASK0123W",
+"mobile": "9444455555",
+"email": "[sid.kulkarni@gmail.com](mailto:sid.kulkarni@gmail.com)",
+"city": "Pune",
+"dateOfBirth": "1986-08-30"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2010",
+"totalNavValue": 4700000,
+"schemeCount": 8,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2011",
+"rawAttributes": {
+"fullName": "Ananya Gupta",
+"pan": "XYANG1234X",
+"mobile": "9555566666",
+"email": "[ananya.gupta@gmail.com](mailto:ananya.gupta@gmail.com)",
+"city": "Kolkata",
+"dateOfBirth": "1994-01-11"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2011",
+"totalNavValue": 850000,
+"schemeCount": 4,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2012",
+"rawAttributes": {
+"fullName": "Manish Verma",
+"pan": "YZMVP2345Y",
+"mobile": "9666677777",
+"email": "[manish.verma@gmail.com](mailto:manish.verma@gmail.com)",
+"city": "Jaipur",
+"dateOfBirth": "1981-05-20"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2012",
+"totalNavValue": 1250000,
+"schemeCount": 4,
+"sipActive": false
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2013",
+"rawAttributes": {
+"fullName": "Pooja Shah",
+"pan": "ABPPS3456Z",
+"mobile": "9777788888",
+"email": "[pooja.shah@gmail.com](mailto:pooja.shah@gmail.com)",
+"city": "Surat",
+"dateOfBirth": "1990-10-06"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2013",
+"totalNavValue": 560000,
+"schemeCount": 3,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2014",
+"rawAttributes": {
+"fullName": "Nikhil Bansal",
+"pan": "CDNBQ4567A",
+"mobile": "9888899999",
+"email": "[nikhil.bansal@gmail.com](mailto:nikhil.bansal@gmail.com)",
+"city": "Noida",
+"dateOfBirth": "1989-07-28"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2014",
+"totalNavValue": 910000,
+"schemeCount": 3,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2015",
+"rawAttributes": {
+"fullName": "Divya Menon",
+"pan": "EFDMN5678B",
+"mobile": "9000099999",
+"email": "[divya.menon@gmail.com](mailto:divya.menon@gmail.com)",
+"city": "Kochi",
+"dateOfBirth": "1995-09-19"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2015",
+"totalNavValue": 420000,
+"schemeCount": 2,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2016",
+"rawAttributes": {
+"fullName": "Rajiv Nanda",
+"pan": "GHRRN6789C",
+"mobile": "9110091100",
+"email": "[rajiv.nanda@gmail.com](mailto:rajiv.nanda@gmail.com)",
+"city": "Chandigarh",
+"dateOfBirth": "1977-03-08"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2016",
+"totalNavValue": 2300000,
+"schemeCount": 5,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2017",
+"rawAttributes": {
+"fullName": "Ishita Sen",
+"pan": "JKISN7890D",
+"mobile": "9220092200",
+"email": "[ishita.sen@gmail.com](mailto:ishita.sen@gmail.com)",
+"city": "Kolkata",
+"dateOfBirth": "1993-11-27"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2017",
+"totalNavValue": 680000,
+"schemeCount": 3,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2018",
+"rawAttributes": {
+"fullName": "Arjun Patel",
+"pan": "MNAPX8901E",
+"mobile": "9330093300",
+"email": "[arjun.patel@gmail.com](mailto:arjun.patel@gmail.com)",
+"city": "Vadodara",
+"dateOfBirth": "1988-06-16"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2018",
+"totalNavValue": 1350000,
+"schemeCount": 5,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2019",
+"rawAttributes": {
+"fullName": "Shreya Deshmukh",
+"pan": "OPSDQ9012F",
+"mobile": "9440094400",
+"email": "[shreya.deshmukh@gmail.com](mailto:shreya.deshmukh@gmail.com)",
+"city": "Nagpur",
+"dateOfBirth": "1996-04-23"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2019",
+"totalNavValue": 590000,
+"schemeCount": 3,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "MUTUAL_FUNDS",
+"sourceCustomerId": "MF_2020",
+"rawAttributes": {
+"fullName": "Vivek Chatterjee",
+"pan": "QRVCW0123G",
+"mobile": "9550095500",
+"email": "[vivek.chatterjee@gmail.com](mailto:vivek.chatterjee@gmail.com)",
+"city": "Bhubaneswar",
+"dateOfBirth": "1983-12-01"
+},
+"holdingsData": {
+"folioNumber": "MFOLIO2020",
+"totalNavValue": 1700000,
+"schemeCount": 5,
+"sipActive": true
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3001",
+"rawAttributes": {
+"fullName": "Aarav Sharma",
+"pan": "ABXPS1234K",
+"mobile": "9876543210",
+"email": "[aarav.sharma@gmail.com](mailto:aarav.sharma@gmail.com)",
+"city": "Mumbai",
+"dateOfBirth": "1990-04-15"
+},
+"holdingsData": {
+"policyNumber": "POL3001",
+"policyType": "TERM",
+"sumAssured": 5000000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3002",
+"rawAttributes": {
+"fullName": "Rohan Mehta",
+"pan": "EFTRM3456P",
+"mobile": "9988776655",
+"email": "[rohan.mehta@gmail.com](mailto:rohan.mehta@gmail.com)",
+"city": "Pune",
+"dateOfBirth": "1985-11-03"
+},
+"holdingsData": {
+"policyNumber": "POL3002",
+"policyType": "HEALTH",
+"sumAssured": 1000000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3003",
+"rawAttributes": {
+"fullName": "Sneha Iyer",
+"pan": "GHYSI4567Q",
+"mobile": "9876501234",
+"email": "[sneha.iyer@gmail.com](mailto:sneha.iyer@gmail.com)",
+"city": "Chennai",
+"dateOfBirth": "1992-02-18"
+},
+"holdingsData": {
+"policyNumber": "POL3003",
+"policyType": "HEALTH",
+"sumAssured": 1500000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3004",
+"rawAttributes": {
+"fullName": "Vikram Desai",
+"pan": "JKLVD5678R",
+"mobile": "9811122233",
+"email": "[vikram.desai@gmail.com](mailto:vikram.desai@gmail.com)",
+"city": "Ahmedabad",
+"dateOfBirth": "1979-09-12"
+},
+"holdingsData": {
+"policyNumber": "POL3004",
+"policyType": "LIFE",
+"sumAssured": 7500000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3005",
+"rawAttributes": {
+"fullName": "Priya Nair",
+"pan": null,
+"mobile": "9820012345",
+"email": null,
+"city": "Bengaluru",
+"dateOfBirth": "1988-07-21"
+},
+"holdingsData": {
+"policyNumber": "POL3005",
+"policyType": "HEALTH",
+"sumAssured": 2000000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3006",
+"rawAttributes": {
+"fullName": "Neha Kapoor",
+"pan": "OPQNK7890T",
+"mobile": "9111122222",
+"email": "[neha.kapoor@gmail.com](mailto:neha.kapoor@gmail.com)",
+"city": "Gurugram",
+"dateOfBirth": "1991-06-25"
+},
+"holdingsData": {
+"policyNumber": "POL3006",
+"policyType": "TERM",
+"sumAssured": 4000000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3007",
+"rawAttributes": {
+"fullName": "Aditya Rao",
+"pan": "QRDAR8901U",
+"mobile": "9222233333",
+"email": "[aditya.rao@gmail.com](mailto:aditya.rao@gmail.com)",
+"city": "Hyderabad",
+"dateOfBirth": "1984-12-17"
+},
+"holdingsData": {
+"policyNumber": "POL3007",
+"policyType": "LIFE",
+"sumAssured": 10000000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3008",
+"rawAttributes": {
+"fullName": "Meera Joshi",
+"pan": "STUMJ9012V",
+"mobile": "9333344444",
+"email": "[meera.joshi@gmail.com](mailto:meera.joshi@gmail.com)",
+"city": "Nashik",
+"dateOfBirth": "1993-03-14"
+},
+"holdingsData": {
+"policyNumber": "POL3008",
+"policyType": "VEHICLE",
+"sumAssured": 800000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3009",
+"rawAttributes": {
+"fullName": "Siddharth Kulkarni",
+"pan": "VWASK0123W",
+"mobile": "9444455555",
+"email": "[sid.kulkarni@gmail.com](mailto:sid.kulkarni@gmail.com)",
+"city": "Pune",
+"dateOfBirth": "1986-08-30"
+},
+"holdingsData": {
+"policyNumber": "POL3009",
+"policyType": "TERM",
+"sumAssured": 8000000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3010",
+"rawAttributes": {
+"fullName": "Ananya Gupta",
+"pan": "XYANG1234X",
+"mobile": "9555566666",
+"email": "[ananya.gupta@gmail.com](mailto:ananya.gupta@gmail.com)",
+"city": "Kolkata",
+"dateOfBirth": "1994-01-11"
+},
+"holdingsData": {
+"policyNumber": "POL3010",
+"policyType": "HEALTH",
+"sumAssured": 1200000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3011",
+"rawAttributes": {
+"fullName": "Manish Verma",
+"pan": "YZMVP2345Y",
+"mobile": "9666677777",
+"email": "[manish.verma@gmail.com](mailto:manish.verma@gmail.com)",
+"city": "Jaipur",
+"dateOfBirth": "1981-05-20"
+},
+"holdingsData": {
+"policyNumber": "POL3011",
+"policyType": "LIFE",
+"sumAssured": 6000000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3012",
+"rawAttributes": {
+"fullName": "Pooja Shah",
+"pan": "ABPPS3456Z",
+"mobile": "9777788888",
+"email": "[pooja.shah@gmail.com](mailto:pooja.shah@gmail.com)",
+"city": "Surat",
+"dateOfBirth": "1990-10-06"
+},
+"holdingsData": {
+"policyNumber": "POL3012",
+"policyType": "HEALTH",
+"sumAssured": 1000000,
+"status": "LAPSED"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3013",
+"rawAttributes": {
+"fullName": "Nikhil Bansal",
+"pan": "CDNBQ4567A",
+"mobile": "9888899999",
+"email": "[nikhil.bansal@gmail.com](mailto:nikhil.bansal@gmail.com)",
+"city": "Noida",
+"dateOfBirth": "1989-07-28"
+},
+"holdingsData": {
+"policyNumber": "POL3013",
+"policyType": "TERM",
+"sumAssured": 3500000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3014",
+"rawAttributes": {
+"fullName": "Divya Menon",
+"pan": "EFDMN5678B",
+"mobile": "9000099999",
+"email": "[divya.menon@gmail.com](mailto:divya.menon@gmail.com)",
+"city": "Kochi",
+"dateOfBirth": "1995-09-19"
+},
+"holdingsData": {
+"policyNumber": "POL3014",
+"policyType": "HEALTH",
+"sumAssured": 750000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3015",
+"rawAttributes": {
+"fullName": "Rajiv Nanda",
+"pan": "GHRRN6789C",
+"mobile": "9110091100",
+"email": "[rajiv.nanda@gmail.com](mailto:rajiv.nanda@gmail.com)",
+"city": "Chandigarh",
+"dateOfBirth": "1977-03-08"
+},
+"holdingsData": {
+"policyNumber": "POL3015",
+"policyType": "LIFE",
+"sumAssured": 9000000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3016",
+"rawAttributes": {
+"fullName": "Ishita Sen",
+"pan": "JKISN7890D",
+"mobile": "9220092200",
+"email": "[ishita.sen@gmail.com](mailto:ishita.sen@gmail.com)",
+"city": "Kolkata",
+"dateOfBirth": "1993-11-27"
+},
+"holdingsData": {
+"policyNumber": "POL3016",
+"policyType": "HEALTH",
+"sumAssured": 1500000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3017",
+"rawAttributes": {
+"fullName": "Arjun Patel",
+"pan": "MNAPX8901E",
+"mobile": "9330093300",
+"email": "[arjun.patel@gmail.com](mailto:arjun.patel@gmail.com)",
+"city": "Vadodara",
+"dateOfBirth": "1988-06-16"
+},
+"holdingsData": {
+"policyNumber": "POL3017",
+"policyType": "TERM",
+"sumAssured": 5000000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3018",
+"rawAttributes": {
+"fullName": "Shreya Deshmukh",
+"pan": "OPSDQ9012F",
+"mobile": "9440094400",
+"email": "[shreya.deshmukh@gmail.com](mailto:shreya.deshmukh@gmail.com)",
+"city": "Nagpur",
+"dateOfBirth": "1996-04-23"
+},
+"holdingsData": {
+"policyNumber": "POL3018",
+"policyType": "HEALTH",
+"sumAssured": 1000000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3019",
+"rawAttributes": {
+"fullName": "Vivek Chatterjee",
+"pan": "QRVCW0123G",
+"mobile": "9550095500",
+"email": "[vivek.chatterjee@gmail.com](mailto:vivek.chatterjee@gmail.com)",
+"city": "Bhubaneswar",
+"dateOfBirth": "1983-12-01"
+},
+"holdingsData": {
+"policyNumber": "POL3019",
+"policyType": "LIFE",
+"sumAssured": 7000000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "INSURANCE",
+"sourceCustomerId": "INS_3020",
+"rawAttributes": {
+"fullName": "Kavya Srinivasan",
+"pan": "STKVS0123H",
+"mobile": "9660096600",
+"email": "[kavya.srinivasan@gmail.com](mailto:kavya.srinivasan@gmail.com)",
+"city": "Coimbatore",
+"dateOfBirth": "1991-08-12"
+},
+"holdingsData": {
+"policyNumber": "POL3020",
+"policyType": "HEALTH",
+"sumAssured": 900000,
+"status": "ACTIVE"
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4001",
+"rawAttributes": {
+"fullName": "Aarav S Sharma",
+"pan": "ABXPS1234K",
+"mobile": "+91 98765-43210",
+"email": "[aarav.sharma@acmecorp.in](mailto:aarav.sharma@acmecorp.in)",
+"city": "Mumbai",
+"dateOfBirth": "1990-04-15"
+},
+"holdingsData": {
+"loanNumber": "LOAN4001",
+"loanType": "HOME",
+"sanctionedAmount": 5000000,
+"outstandingAmount": 4700000,
+"emiAmount": 52000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4002",
+"rawAttributes": {
+"fullName": "Rohan Mehta",
+"pan": "EFTRM3456P",
+"mobile": "9988776655",
+"email": "[rohan.mehta@gmail.com](mailto:rohan.mehta@gmail.com)",
+"city": "Pune",
+"dateOfBirth": "1985-11-03"
+},
+"holdingsData": {
+"loanNumber": "LOAN4002",
+"loanType": "PERSONAL",
+"sanctionedAmount": 1200000,
+"outstandingAmount": 640000,
+"emiAmount": 28000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4003",
+"rawAttributes": {
+"fullName": "Vikram Desai",
+"pan": "JKLVD5678R",
+"mobile": "9811122233",
+"email": "[vikram.desai@gmail.com](mailto:vikram.desai@gmail.com)",
+"city": "Ahmedabad",
+"dateOfBirth": "1979-09-12"
+},
+"holdingsData": {
+"loanNumber": "LOAN4003",
+"loanType": "AUTO",
+"sanctionedAmount": 1800000,
+"outstandingAmount": 900000,
+"emiAmount": 31000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4004",
+"rawAttributes": {
+"fullName": "Sneha Iyer",
+"pan": "GHYSI4567Q",
+"mobile": "9876501234",
+"email": "[sneha.iyer@gmail.com](mailto:sneha.iyer@gmail.com)",
+"city": "Chennai",
+"dateOfBirth": "1992-02-18"
+},
+"holdingsData": {
+"loanNumber": "LOAN4004",
+"loanType": "HOME",
+"sanctionedAmount": 6500000,
+"outstandingAmount": 6100000,
+"emiAmount": 69000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4005",
+"rawAttributes": {
+"fullName": "Priya V Nair",
+"pan": null,
+"mobile": "+91 98200 12345",
+"email": "[priya.nair@company.in](mailto:priya.nair@company.in)",
+"city": "Bengaluru",
+"dateOfBirth": "1988-07-21"
+},
+"holdingsData": {
+"loanNumber": "LOAN4005",
+"loanType": "PERSONAL",
+"sanctionedAmount": 900000,
+"outstandingAmount": 420000,
+"emiAmount": 21000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4006",
+"rawAttributes": {
+"fullName": "Neha Kapoor",
+"pan": "OPQNK7890T",
+"mobile": "9111122222",
+"email": "[neha.kapoor@gmail.com](mailto:neha.kapoor@gmail.com)",
+"city": "Gurugram",
+"dateOfBirth": "1991-06-25"
+},
+"holdingsData": {
+"loanNumber": "LOAN4006",
+"loanType": "AUTO",
+"sanctionedAmount": 1500000,
+"outstandingAmount": 800000,
+"emiAmount": 27000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4007",
+"rawAttributes": {
+"fullName": "Aditya Rao",
+"pan": "QRDAR8901U",
+"mobile": "9222233333",
+"email": "[aditya.rao@gmail.com](mailto:aditya.rao@gmail.com)",
+"city": "Hyderabad",
+"dateOfBirth": "1984-12-17"
+},
+"holdingsData": {
+"loanNumber": "LOAN4007",
+"loanType": "HOME",
+"sanctionedAmount": 8000000,
+"outstandingAmount": 7200000,
+"emiAmount": 84000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4008",
+"rawAttributes": {
+"fullName": "Meera Joshi",
+"pan": "STUMJ9012V",
+"mobile": "9333344444",
+"email": "[meera.joshi@gmail.com](mailto:meera.joshi@gmail.com)",
+"city": "Nashik",
+"dateOfBirth": "1993-03-14"
+},
+"holdingsData": {
+"loanNumber": "LOAN4008",
+"loanType": "PERSONAL",
+"sanctionedAmount": 600000,
+"outstandingAmount": 250000,
+"emiAmount": 15000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4009",
+"rawAttributes": {
+"fullName": "Siddharth Kulkarni",
+"pan": "VWASK0123W",
+"mobile": "9444455555",
+"email": "[sid.kulkarni@gmail.com](mailto:sid.kulkarni@gmail.com)",
+"city": "Pune",
+"dateOfBirth": "1986-08-30"
+},
+"holdingsData": {
+"loanNumber": "LOAN4009",
+"loanType": "HOME",
+"sanctionedAmount": 9000000,
+"outstandingAmount": 8300000,
+"emiAmount": 97000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4010",
+"rawAttributes": {
+"fullName": "Ananya Gupta",
+"pan": "XYANG1234X",
+"mobile": "9555566666",
+"email": "[ananya.gupta@gmail.com](mailto:ananya.gupta@gmail.com)",
+"city": "Kolkata",
+"dateOfBirth": "1994-01-11"
+},
+"holdingsData": {
+"loanNumber": "LOAN4010",
+"loanType": "PERSONAL",
+"sanctionedAmount": 700000,
+"outstandingAmount": 310000,
+"emiAmount": 17000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4011",
+"rawAttributes": {
+"fullName": "Manish Verma",
+"pan": "YZMVP2345Y",
+"mobile": "9666677777",
+"email": "[manish.verma@gmail.com](mailto:manish.verma@gmail.com)",
+"city": "Jaipur",
+"dateOfBirth": "1981-05-20"
+},
+"holdingsData": {
+"loanNumber": "LOAN4011",
+"loanType": "AUTO",
+"sanctionedAmount": 1100000,
+"outstandingAmount": 540000,
+"emiAmount": 24000,
+"daysPastDue": 72
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4012",
+"rawAttributes": {
+"fullName": "Pooja Shah",
+"pan": "ABPPS3456Z",
+"mobile": "9777788888",
+"email": "[pooja.shah@gmail.com](mailto:pooja.shah@gmail.com)",
+"city": "Surat",
+"dateOfBirth": "1990-10-06"
+},
+"holdingsData": {
+"loanNumber": "LOAN4012",
+"loanType": "PERSONAL",
+"sanctionedAmount": 850000,
+"outstandingAmount": 390000,
+"emiAmount": 19000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4013",
+"rawAttributes": {
+"fullName": "Nikhil Bansal",
+"pan": "CDNBQ4567A",
+"mobile": "9888899999",
+"email": "[nikhil.bansal@gmail.com](mailto:nikhil.bansal@gmail.com)",
+"city": "Noida",
+"dateOfBirth": "1989-07-28"
+},
+"holdingsData": {
+"loanNumber": "LOAN4013",
+"loanType": "HOME",
+"sanctionedAmount": 5500000,
+"outstandingAmount": 5100000,
+"emiAmount": 61000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4014",
+"rawAttributes": {
+"fullName": "Divya Menon",
+"pan": "EFDMN5678B",
+"mobile": "9000099999",
+"email": "[divya.menon@gmail.com](mailto:divya.menon@gmail.com)",
+"city": "Kochi",
+"dateOfBirth": "1995-09-19"
+},
+"holdingsData": {
+"loanNumber": "LOAN4014",
+"loanType": "AUTO",
+"sanctionedAmount": 900000,
+"outstandingAmount": 410000,
+"emiAmount": 20000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4015",
+"rawAttributes": {
+"fullName": "Rajiv Nanda",
+"pan": "GHRRN6789C",
+"mobile": "9110091100",
+"email": "[rajiv.nanda@gmail.com](mailto:rajiv.nanda@gmail.com)",
+"city": "Chandigarh",
+"dateOfBirth": "1977-03-08"
+},
+"holdingsData": {
+"loanNumber": "LOAN4015",
+"loanType": "HOME",
+"sanctionedAmount": 7500000,
+"outstandingAmount": 6300000,
+"emiAmount": 76000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4016",
+"rawAttributes": {
+"fullName": "Ishita Sen",
+"pan": "JKISN7890D",
+"mobile": "9220092200",
+"email": "[ishita.sen@gmail.com](mailto:ishita.sen@gmail.com)",
+"city": "Kolkata",
+"dateOfBirth": "1993-11-27"
+},
+"holdingsData": {
+"loanNumber": "LOAN4016",
+"loanType": "PERSONAL",
+"sanctionedAmount": 500000,
+"outstandingAmount": 180000,
+"emiAmount": 12000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4017",
+"rawAttributes": {
+"fullName": "Arjun Patel",
+"pan": "MNAPX8901E",
+"mobile": "9330093300",
+"email": "[arjun.patel@gmail.com](mailto:arjun.patel@gmail.com)",
+"city": "Vadodara",
+"dateOfBirth": "1988-06-16"
+},
+"holdingsData": {
+"loanNumber": "LOAN4017",
+"loanType": "AUTO",
+"sanctionedAmount": 1300000,
+"outstandingAmount": 600000,
+"emiAmount": 26000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4018",
+"rawAttributes": {
+"fullName": "Shreya Deshmukh",
+"pan": "OPSDQ9012F",
+"mobile": "9440094400",
+"email": "[shreya.deshmukh@gmail.com](mailto:shreya.deshmukh@gmail.com)",
+"city": "Nagpur",
+"dateOfBirth": "1996-04-23"
+},
+"holdingsData": {
+"loanNumber": "LOAN4018",
+"loanType": "PERSONAL",
+"sanctionedAmount": 400000,
+"outstandingAmount": 210000,
+"emiAmount": 10000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4019",
+"rawAttributes": {
+"fullName": "Vivek Chatterjee",
+"pan": "QRVCW0123G",
+"mobile": "9550095500",
+"email": "[vivek.chatterjee@gmail.com](mailto:vivek.chatterjee@gmail.com)",
+"city": "Bhubaneswar",
+"dateOfBirth": "1983-12-01"
+},
+"holdingsData": {
+"loanNumber": "LOAN4019",
+"loanType": "HOME",
+"sanctionedAmount": 6200000,
+"outstandingAmount": 5700000,
+"emiAmount": 67000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "LOANS",
+"sourceCustomerId": "LN_4020",
+"rawAttributes": {
+"fullName": "Kavya Srinivasan",
+"pan": "STKVS0123H",
+"mobile": "9660096600",
+"email": "[kavya.srinivasan@gmail.com](mailto:kavya.srinivasan@gmail.com)",
+"city": "Coimbatore",
+"dateOfBirth": "1991-08-12"
+},
+"holdingsData": {
+"loanNumber": "LOAN4020",
+"loanType": "PERSONAL",
+"sanctionedAmount": 750000,
+"outstandingAmount": 320000,
+"emiAmount": 18000,
+"daysPastDue": 0
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5001",
+"rawAttributes": {
+"fullName": "Aarav Sharma",
+"pan": "ABXPS1234K",
+"mobile": "9876543210",
+"email": "[aarav.sharma@gmail.com](mailto:aarav.sharma@gmail.com)",
+"city": "Mumbai",
+"dateOfBirth": "1990-04-15"
+},
+"holdingsData": {
+"accountNumber": "WLACC5001",
+"aum": 3200000,
+"pmsActive": false,
+"idleCash": 100000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5002",
+"rawAttributes": {
+"fullName": "Rohan Mehta",
+"pan": "EFTRM3456P",
+"mobile": "9988776655",
+"email": "[rohan.mehta@gmail.com](mailto:rohan.mehta@gmail.com)",
+"city": "Pune",
+"dateOfBirth": "1985-11-03"
+},
+"holdingsData": {
+"accountNumber": "WLACC5002",
+"aum": 2500000,
+"pmsActive": true,
+"idleCash": 150000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5003",
+"rawAttributes": {
+"fullName": "Sneha Iyer",
+"pan": "GHYSI4567Q",
+"mobile": "9876501234",
+"email": "[sneha.iyer@gmail.com](mailto:sneha.iyer@gmail.com)",
+"city": "Chennai",
+"dateOfBirth": "1992-02-18"
+},
+"holdingsData": {
+"accountNumber": "WLACC5003",
+"aum": 1800000,
+"pmsActive": false,
+"idleCash": 250000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5004",
+"rawAttributes": {
+"fullName": "Vikram Desai",
+"pan": "JKLVD5678R",
+"mobile": "9811122233",
+"email": "[vikram.desai@gmail.com](mailto:vikram.desai@gmail.com)",
+"city": "Ahmedabad",
+"dateOfBirth": "1979-09-12"
+},
+"holdingsData": {
+"accountNumber": "WLACC5004",
+"aum": 4100000,
+"pmsActive": true,
+"idleCash": 300000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5005",
+"rawAttributes": {
+"fullName": "Priya Venkatesh Nair",
+"pan": "CDQPN2345L",
+"mobile": "9820012345",
+"email": "[priya.nair@gmail.com](mailto:priya.nair@gmail.com)",
+"city": "Bengaluru",
+"dateOfBirth": "1988-07-21"
+},
+"holdingsData": {
+"accountNumber": "WLACC5005",
+"aum": 1400000,
+"pmsActive": false,
+"idleCash": 950000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5006",
+"rawAttributes": {
+"fullName": "Neha Kapoor",
+"pan": "OPQNK7890T",
+"mobile": "9111122222",
+"email": "[neha.kapoor@gmail.com](mailto:neha.kapoor@gmail.com)",
+"city": "Gurugram",
+"dateOfBirth": "1991-06-25"
+},
+"holdingsData": {
+"accountNumber": "WLACC5006",
+"aum": 900000,
+"pmsActive": false,
+"idleCash": 120000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5007",
+"rawAttributes": {
+"fullName": "Aditya Rao",
+"pan": "QRDAR8901U",
+"mobile": "9222233333",
+"email": "[aditya.rao@gmail.com](mailto:aditya.rao@gmail.com)",
+"city": "Hyderabad",
+"dateOfBirth": "1984-12-17"
+},
+"holdingsData": {
+"accountNumber": "WLACC5007",
+"aum": 6200000,
+"pmsActive": true,
+"idleCash": 450000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5008",
+"rawAttributes": {
+"fullName": "Meera Joshi",
+"pan": "STUMJ9012V",
+"mobile": "9333344444",
+"email": "[meera.joshi@gmail.com](mailto:meera.joshi@gmail.com)",
+"city": "Nashik",
+"dateOfBirth": "1993-03-14"
+},
+"holdingsData": {
+"accountNumber": "WLACC5008",
+"aum": 550000,
+"pmsActive": false,
+"idleCash": 90000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5009",
+"rawAttributes": {
+"fullName": "Siddharth Kulkarni",
+"pan": "VWASK0123W",
+"mobile": "9444455555",
+"email": "[sid.kulkarni@gmail.com](mailto:sid.kulkarni@gmail.com)",
+"city": "Pune",
+"dateOfBirth": "1986-08-30"
+},
+"holdingsData": {
+"accountNumber": "WLACC5009",
+"aum": 7600000,
+"pmsActive": true,
+"idleCash": 600000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5010",
+"rawAttributes": {
+"fullName": "Ananya Gupta",
+"pan": "XYANG1234X",
+"mobile": "9555566666",
+"email": "[ananya.gupta@gmail.com](mailto:ananya.gupta@gmail.com)",
+"city": "Kolkata",
+"dateOfBirth": "1994-01-11"
+},
+"holdingsData": {
+"accountNumber": "WLACC5010",
+"aum": 1250000,
+"pmsActive": false,
+"idleCash": 200000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5011",
+"rawAttributes": {
+"fullName": "Manish Verma",
+"pan": "YZMVP2345Y",
+"mobile": "9666677777",
+"email": "[manish.verma@gmail.com](mailto:manish.verma@gmail.com)",
+"city": "Jaipur",
+"dateOfBirth": "1981-05-20"
+},
+"holdingsData": {
+"accountNumber": "WLACC5011",
+"aum": 2100000,
+"pmsActive": false,
+"idleCash": 300000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5012",
+"rawAttributes": {
+"fullName": "Pooja Shah",
+"pan": "ABPPS3456Z",
+"mobile": "9777788888",
+"email": "[pooja.shah@gmail.com](mailto:pooja.shah@gmail.com)",
+"city": "Surat",
+"dateOfBirth": "1990-10-06"
+},
+"holdingsData": {
+"accountNumber": "WLACC5012",
+"aum": 680000,
+"pmsActive": false,
+"idleCash": 75000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5013",
+"rawAttributes": {
+"fullName": "Nikhil Bansal",
+"pan": "CDNBQ4567A",
+"mobile": "9888899999",
+"email": "[nikhil.bansal@gmail.com](mailto:nikhil.bansal@gmail.com)",
+"city": "Noida",
+"dateOfBirth": "1989-07-28"
+},
+"holdingsData": {
+"accountNumber": "WLACC5013",
+"aum": 1550000,
+"pmsActive": false,
+"idleCash": 180000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5014",
+"rawAttributes": {
+"fullName": "Divya Menon",
+"pan": "EFDMN5678B",
+"mobile": "9000099999",
+"email": "[divya.menon@gmail.com](mailto:divya.menon@gmail.com)",
+"city": "Kochi",
+"dateOfBirth": "1995-09-19"
+},
+"holdingsData": {
+"accountNumber": "WLACC5014",
+"aum": 720000,
+"pmsActive": false,
+"idleCash": 110000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5015",
+"rawAttributes": {
+"fullName": "Rajiv Nanda",
+"pan": "GHRRN6789C",
+"mobile": "9110091100",
+"email": "[rajiv.nanda@gmail.com](mailto:rajiv.nanda@gmail.com)",
+"city": "Chandigarh",
+"dateOfBirth": "1977-03-08"
+},
+"holdingsData": {
+"accountNumber": "WLACC5015",
+"aum": 5800000,
+"pmsActive": true,
+"idleCash": 400000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5016",
+"rawAttributes": {
+"fullName": "Ishita Sen",
+"pan": "JKISN7890D",
+"mobile": "9220092200",
+"email": "[ishita.sen@gmail.com](mailto:ishita.sen@gmail.com)",
+"city": "Kolkata",
+"dateOfBirth": "1993-11-27"
+},
+"holdingsData": {
+"accountNumber": "WLACC5016",
+"aum": 870000,
+"pmsActive": false,
+"idleCash": 130000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5017",
+"rawAttributes": {
+"fullName": "Arjun Patel",
+"pan": "MNAPX8901E",
+"mobile": "9330093300",
+"email": "[arjun.patel@gmail.com](mailto:arjun.patel@gmail.com)",
+"city": "Vadodara",
+"dateOfBirth": "1988-06-16"
+},
+"holdingsData": {
+"accountNumber": "WLACC5017",
+"aum": 1900000,
+"pmsActive": false,
+"idleCash": 220000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5018",
+"rawAttributes": {
+"fullName": "Shreya Deshmukh",
+"pan": "OPSDQ9012F",
+"mobile": "9440094400",
+"email": "[shreya.deshmukh@gmail.com](mailto:shreya.deshmukh@gmail.com)",
+"city": "Nagpur",
+"dateOfBirth": "1996-04-23"
+},
+"holdingsData": {
+"accountNumber": "WLACC5018",
+"aum": 640000,
+"pmsActive": false,
+"idleCash": 90000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5019",
+"rawAttributes": {
+"fullName": "Vivek Chatterjee",
+"pan": "QRVCW0123G",
+"mobile": "9550095500",
+"email": "[vivek.chatterjee@gmail.com](mailto:vivek.chatterjee@gmail.com)",
+"city": "Bhubaneswar",
+"dateOfBirth": "1983-12-01"
+},
+"holdingsData": {
+"accountNumber": "WLACC5019",
+"aum": 3300000,
+"pmsActive": true,
+"idleCash": 350000
+}
+},
+{
+"sourceSystem": "WEALTH",
+"sourceCustomerId": "WL_5020",
+"rawAttributes": {
+"fullName": "Kavya Srinivasan",
+"pan": "STKVS0123H",
+"mobile": "9660096600",
+"email": "[kavya.srinivasan@gmail.com](mailto:kavya.srinivasan@gmail.com)",
+"city": "Coimbatore",
+"dateOfBirth": "1991-08-12"
+},
+"holdingsData": {
+"accountNumber": "WLACC5020",
+"aum": 1050000,
+"pmsActive": false,
+"idleCash": 180000
+}
+}
+]
