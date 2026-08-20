@@ -42,7 +42,7 @@ const getPendingReviews = asyncHandler(async (req, res) => {
       .populate("sourceRecordA.recordRef")
       .populate("sourceRecordB.recordRef")
       .populate("sourceRecordB.goldenCustomerRef")
-      .sort({ matchConfidence: -1, createdAt: -1 })
+      .sort({ confidenceScore: -1, createdAt: -1 })
       .skip((pageNumber - 1) * limitNumber)
       .limit(limitNumber)
       .lean()
@@ -164,7 +164,7 @@ const resolveMerge = asyncHandler(async (req, res) => {
         sourceRecordRef: sourceRec._id,
         linkedAt: new Date(),
         matchType: "MANUAL_MERGE",
-        confidenceScore: reviewItem.matchConfidence || 1.0
+        confidenceScore: reviewItem.confidenceScore || 1.0
       });
     }
   };
@@ -183,7 +183,7 @@ const resolveMerge = asyncHandler(async (req, res) => {
             status: "LINKED",
             goldenCustomerId: goldenCustomer._id,
             linkedAt: new Date(),
-            confidenceScore: reviewItem.matchConfidence || 1.0,
+            confidenceScore: reviewItem.confidenceScore || 1.0,
             matchReason: "MANUAL_MERGE_APPROVED"
           }
         }

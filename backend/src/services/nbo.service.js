@@ -52,7 +52,9 @@ export const evaluateCustomerOpportunities = async (customerDoc, activeRules = [
     loansTotal: Number(breakdown.loans || 0),
     wealthTotal: Number(breakdown.wealth || 0),
     trvTotal: Number(trv.totalValue || 0),
-    relationshipAgeYears: populatedCustomer.relationshipAgeYears || 1
+    relationshipAgeYears: populatedCustomer.createdAt
+      ? Math.max(1, Math.floor((Date.now() - new Date(populatedCustomer.createdAt).getTime()) / (365.25 * 24 * 60 * 60 * 1000)))
+      : 1
   };
 
   const opportunitiesToCreate = [];

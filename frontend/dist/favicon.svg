@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#234A8F" />
+      <stop offset="100%" stop-color="#0E1E3B" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Rounded Badge -->
+  <rect width="64" height="64" rx="16" fill="url(#brandGrad)" />
+  
+  <!-- Outer Concentric Orbit Ring -->
+  <circle cx="32" cy="32" r="21" stroke="#93C5FD" stroke-width="2.5" stroke-opacity="0.35" stroke-dasharray="3 3" />
+  
+  <!-- Middle Resolution Ring -->
+  <circle cx="32" cy="32" r="14" stroke="#60A5FA" stroke-width="3" stroke-linecap="round" stroke-dasharray="24 8" />
+  
+  <!-- Inner Golden Node Core -->
+  <circle cx="32" cy="32" r="6.5" fill="url(#accentGrad)" />
+  <circle cx="32" cy="32" r="2.5" fill="#FFFFFF" />
+  
+  <!-- Data Connection Nodes -->
+  <circle cx="32" cy="11" r="3" fill="#60A5FA" />
+  <circle cx="49" cy="42" r="2.5" fill="#93C5FD" />
+  <circle cx="15" cy="42" r="2.5" fill="#93C5FD" />
+</svg>

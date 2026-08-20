@@ -4,9 +4,11 @@ import {
     getOpportunityById,
     updateOpportunityStatus,
     getOpportunityAnalytics,
-    recalculateCustomerOpportunities
+    recalculateCustomerOpportunities,
+    getAICrossSellInsight
 } from "../controllers/opportunity.controller.js";
 import { verifyJwt } from "../middlewares/auth.middleware.js";
+
 
 const opportunity_router = Router();
 
@@ -18,5 +20,5 @@ opportunity_router.route("/recalculate").post(recalculateCustomerOpportunities);
 opportunity_router.route("/recalculate/:goldenCustomerId").post(recalculateCustomerOpportunities);
 opportunity_router.route("/:id").get(getOpportunityById);
 opportunity_router.route("/:id/status").patch(updateOpportunityStatus);
-
+opportunity_router.route("/ai-insight/:goldenCustomerId").get(getAICrossSellInsight);
 export default opportunity_router;

@@ -283,6 +283,98 @@ export const calculateTRVForCluster = (records = []) => {
   };
 };
 
+/**
+ * Resolves attribute conflicts across source records in a cluster.
+ * Evaluates competing values for fullName, primaryEmail, primaryPhone using
+ * SOURCE_PRECEDENCE (system hierarchy) or RECENCY.
+ */
+export const resolveAttributeConflicts = (clusterRecords = [], configOptions = {}) => {
+  if (!Array.isArray(clusterRecords) || clusterRecords.length <= 1) {
+    return [];
+  }
+
+  const systemPrecedence = configOptions.sourcePrecedence || [
+    "LOANS",
+    "INSURANCE",
+    "MUTUAL_FUNDS",
+    "WEALTH",
+    "EQUITY"
+  ];
+
+  const getPrecedenceRank = (sys) => systemPrecedence.indexOf(sys?.toUpperCase());
+
+  const attributesToEvaluate = [
+    { key: "fullName", getVal: (r) => r.rawAttributes?.fullName || r.cleanName },
+    { key: "primaryEmail", getVal: (r) => r.rawAttributes?.email || r.cleanEmail },
+    { key: "primaryPhone", getVal: (r) => r.rawAttributes?.phone || r.rawAttributes?.mobile || r.cleanPhone }
+  ];
+
+  const attributeConflicts = [];
+
+  for (const attrDef of attributesToEvaluate) {
+    const competingEntries = [];
+
+    for (const rec of clusterRecords) {
+      const val = attrDef.getVal(rec);
+      if (val && String(val).trim() !== "") {
+        competingEntries.push({
+          value: String(val).trim(),
+          sourceSystem: rec.sourceSystem || "UNKNOWN",
+          record: rec,
+          createdAt: rec.createdAt ? new Date(rec.createdAt) : new Date(0),
+          updatedAt: rec.updatedAt ? new Date(rec.updatedAt) : new Date(0)
+        });
+      }
+    }
+
+    const uniqueValuesMap = new Map();
+    for (const entry of competingEntries) {
+      const normalizedKey = entry.value.toLowerCase();
+      if (!uniqueValuesMap.has(normalizedKey)) {
+        uniqueValuesMap.set(normalizedKey, entry);
+      }
+    }
+
+    if (uniqueValuesMap.size > 1) {
+      const competingValues = Array.from(uniqueValuesMap.values()).map((e) => ({
+        value: e.value,
+        sourceSystem: e.sourceSystem,
+        confidence: 1.0
+      }));
+
+      const candidateRanks = Array.from(uniqueValuesMap.values()).map((e) => getPrecedenceRank(e.sourceSystem));
+      const hasDistinctPrecedence = new Set(candidateRanks).size > 1;
+
+      let winningEntry;
+      let resolutionMethod;
+
+      if (hasDistinctPrecedence) {
+        winningEntry = Array.from(uniqueValuesMap.values()).reduce((best, curr) => {
+          return getPrecedenceRank(curr.sourceSystem) > getPrecedenceRank(best.sourceSystem) ? curr : best;
+        });
+        resolutionMethod = "SOURCE_PRECEDENCE";
+      } else {
+        winningEntry = Array.from(uniqueValuesMap.values()).reduce((best, curr) => {
+          const currTime = curr.updatedAt.getTime() || curr.createdAt.getTime();
+          const bestTime = best.updatedAt.getTime() || best.createdAt.getTime();
+          return currTime >= bestTime ? curr : best;
+        });
+        resolutionMethod = "RECENCY";
+      }
+
+      attributeConflicts.push({
+        attribute: attrDef.key,
+        competingValues,
+        resolvedValue: winningEntry.value,
+        resolutionMethod,
+        status: "RESOLVED"
+      });
+    }
+  }
+
+  return attributeConflicts;
+};
+
 // ==========================================
 // 5. End-to-End Resolution Pipeline
 // ==========================================
@@ -385,6 +477,52 @@ export const processIdentityResolution = async (customSourceRecords = null) => {
         uf.union(recA._id, recB._id);
         pairwiseMatches.push({ recA, recB, matchConfidence, matchType });
       } else if (matchConfidence >= reviewQueueMinThreshold && matchConfidence < autoMergeThreshold) {
+        const conflicts = [];
+
+        if (recA.cleanPan && recB.cleanPan && recA.cleanPan !== recB.cleanPan) {
+          conflicts.push({
+            conflictOn: "PAN",
+            conflictType: "HARD",
+            actualConflict: {
+              recordAValue: recA.rawAttributes?.pan || recA.cleanPan,
+              recordBValue: recB.rawAttributes?.pan || recB.cleanPan
+            }
+          });
+        }
+
+        if (recA.cleanName && recB.cleanName && recA.cleanName !== recB.cleanName) {
+          conflicts.push({
+            conflictOn: "NAME",
+            conflictType: "SOFT",
+            actualConflict: {
+              recordAValue: recA.rawAttributes?.fullName || recA.cleanName,
+              recordBValue: recB.rawAttributes?.fullName || recB.cleanName
+            }
+          });
+        }
+
+        if (recA.cleanEmail && recB.cleanEmail && recA.cleanEmail !== recB.cleanEmail) {
+          conflicts.push({
+            conflictOn: "EMAIL",
+            conflictType: "SOFT",
+            actualConflict: {
+              recordAValue: recA.rawAttributes?.email || recA.cleanEmail,
+              recordBValue: recB.rawAttributes?.email || recB.cleanEmail
+            }
+          });
+        }
+
+        if (recA.cleanPhone && recB.cleanPhone && recA.cleanPhone !== recB.cleanPhone) {
+          conflicts.push({
+            conflictOn: "PHONE",
+            conflictType: "SOFT",
+            actualConflict: {
+              recordAValue: recA.rawAttributes?.phone || recA.rawAttributes?.mobile || recA.cleanPhone,
+              recordBValue: recB.rawAttributes?.phone || recB.rawAttributes?.mobile || recB.cleanPhone
+            }
+          });
+        }
+
         reviewQueueItems.push({
           reviewId: `REV-${recA.sourceCustomerId}-${recB.sourceCustomerId}-${Date.now()}`,
           sourceRecordA: {
@@ -399,8 +537,8 @@ export const processIdentityResolution = async (customSourceRecords = null) => {
             recordRef: recB._id,
             snapshot: recB.rawAttributes
           },
-          matchConfidence,
-          matchBreakdown: breakdown,
+          confidenceScore: matchConfidence,
+          conflicts,
           ambiguityReason: `Borderline similarity score (${(matchConfidence * 100).toFixed(1)}%) requires manual verification.`,
           status: "PENDING"
         });
@@ -430,6 +568,138 @@ export const processIdentityResolution = async (customSourceRecords = null) => {
     const city = clusterRecords.find((r) => r.rawAttributes?.city)?.rawAttributes?.city || "";
     const trv = calculateTRVForCluster(clusterRecords);
 
+    // Build domain holdings arrays for GoldenCustomer schema
+    const equityAccounts = [];
+    const loanAccounts = [];
+    const insurancePolicies = [];
+    const mfInvestments = [];
+    const wealthPortfolios = [];
+
+    for (const r of clusterRecords) {
+      const dHoldings = r.domainHoldings || {};
+      const hData = r.holdingsData || {};
+
+      if (dHoldings.equityHoldings && dHoldings.equityHoldings.length > 0) {
+        equityAccounts.push(...dHoldings.equityHoldings);
+      } else if (r.sourceSystem === "EQUITY" && Object.keys(hData).length > 0) {
+        equityAccounts.push(hData);
+      }
+
+      if (dHoldings.loans && dHoldings.loans.length > 0) {
+        loanAccounts.push(...dHoldings.loans);
+      } else if (r.sourceSystem === "LOANS" && Object.keys(hData).length > 0) {
+        loanAccounts.push(hData);
+      }
+
+      if (dHoldings.mfHoldings && dHoldings.mfHoldings.length > 0) {
+        mfInvestments.push(...dHoldings.mfHoldings);
+      } else if (r.sourceSystem === "MUTUAL_FUNDS" && Object.keys(hData).length > 0) {
+        mfInvestments.push(hData);
+      }
+
+      if (dHoldings.wealthHoldings && dHoldings.wealthHoldings.length > 0) {
+        wealthPortfolios.push(...dHoldings.wealthHoldings);
+      } else if (r.sourceSystem === "WEALTH" && Object.keys(hData).length > 0) {
+        wealthPortfolios.push(hData);
+      }
+
+      const policiesSource = (dHoldings.insurancePolicies && dHoldings.insurancePolicies.length > 0)
+        ? dHoldings.insurancePolicies
+        : (r.sourceSystem === "INSURANCE" && Object.keys(hData).length > 0 ? [hData] : []);
+
+      for (const pol of policiesSource) {
+        let rawType = (pol.policyType || pol.type || "").toUpperCase();
+        let mappedType = "OTHER";
+        if (rawType === "TERM" || rawType === "LIFE") mappedType = "LIFE";
+        else if (rawType === "HEALTH") mappedType = "HEALTH";
+        else if (rawType === "VEHICLE" || rawType === "CAR") mappedType = "CAR";
+        else if (rawType === "HOME") mappedType = "HOME";
+        else if (rawType === "TRAVEL") mappedType = "TRAVEL";
+
+        let rawTier = (pol.tier || "").toUpperCase();
+        let mappedTier = ["BASIC", "STANDARD", "PREMIUM"].includes(rawTier) ? rawTier : "STANDARD";
+
+        let amt = Number(pol.amount ?? pol.sumAssured ?? pol.premiumAmount ?? 0);
+        if (isNaN(amt) || amt < 0) amt = 0;
+
+        insurancePolicies.push({
+          type: mappedType,
+          tier: mappedTier,
+          amount: amt
+        });
+      }
+    }
+
+    // Assemble Provenance Ledger
+    const nameRec = clusterRecords.find((r) => r.rawAttributes?.fullName);
+    const emailRec = clusterRecords.find((r) => r.cleanEmail);
+    const phoneRec = clusterRecords.find((r) => r.cleanPhone);
+    const panRec = clusterRecords.find((r) => r.cleanPan);
+    const cityRec = clusterRecords.find((r) => r.rawAttributes?.city);
+
+    const provenance = [
+      {
+        field: "fullName",
+        selectedValue: primaryName,
+        selectedFrom: nameRec?.sourceSystem || "SYSTEM",
+        values: clusterRecords
+          .filter((r) => r.rawAttributes?.fullName)
+          .map((r) => ({
+            sourceSystem: r.sourceSystem,
+            sourceCustomerId: r.sourceCustomerId,
+            value: r.rawAttributes.fullName
+          }))
+      },
+      {
+        field: "primaryEmail",
+        selectedValue: primaryEmail,
+        selectedFrom: emailRec?.sourceSystem || "SYSTEM",
+        values: clusterRecords
+          .filter((r) => r.cleanEmail || r.rawAttributes?.email)
+          .map((r) => ({
+            sourceSystem: r.sourceSystem,
+            sourceCustomerId: r.sourceCustomerId,
+            value: r.rawAttributes?.email || r.cleanEmail
+          }))
+      },
+      {
+        field: "primaryPhone",
+        selectedValue: primaryPhone,
+        selectedFrom: phoneRec?.sourceSystem || "SYSTEM",
+        values: clusterRecords
+          .filter((r) => r.cleanPhone || r.rawAttributes?.mobile || r.rawAttributes?.phone)
+          .map((r) => ({
+            sourceSystem: r.sourceSystem,
+            sourceCustomerId: r.sourceCustomerId,
+            value: r.rawAttributes?.mobile || r.rawAttributes?.phone || r.cleanPhone
+          }))
+      },
+      {
+        field: "pan",
+        selectedValue: primaryPan,
+        selectedFrom: panRec?.sourceSystem || "SYSTEM",
+        values: clusterRecords
+          .filter((r) => r.cleanPan || r.rawAttributes?.pan)
+          .map((r) => ({
+            sourceSystem: r.sourceSystem,
+            sourceCustomerId: r.sourceCustomerId,
+            value: r.rawAttributes?.pan || r.cleanPan
+          }))
+      },
+      {
+        field: "city",
+        selectedValue: city,
+        selectedFrom: cityRec?.sourceSystem || "SYSTEM",
+        values: clusterRecords
+          .filter((r) => r.rawAttributes?.city)
+          .map((r) => ({
+            sourceSystem: r.sourceSystem,
+            sourceCustomerId: r.sourceCustomerId,
+            value: r.rawAttributes.city
+          }))
+      }
+    ];
+
     // Check if any source record in this cluster is already linked to a Golden Customer
     const existingLinkedRecord = clusterRecords.find((r) => r.linkageStatus?.goldenCustomerId);
     let existingGoldenDoc = null;
@@ -456,6 +726,8 @@ export const processIdentityResolution = async (customSourceRecords = null) => {
       linkedAt: new Date()
     }));
 
+    const attributeConflicts = resolveAttributeConflicts(clusterRecords);
+
     const queryCondition = existingGoldenDoc
       ? { _id: existingGoldenDoc._id }
       : primaryPan
@@ -475,7 +747,15 @@ export const processIdentityResolution = async (customSourceRecords = null) => {
             city
           },
           linkedSourceRecords,
+          attributeConflicts,
+          equity: { accounts: equityAccounts },
+          loans: { accounts: loanAccounts },
+          insurance: { policies: insurancePolicies },
+          mutualFunds: { investments: mfInvestments },
+          wealth: { portfolios: wealthPortfolios },
           totalRelationshipValue: trv,
+          provenance,
+          matchStatus: attributeConflicts.length > 0 ? "PARTIALLY_RESOLVED" : "AUTO_MERGED",
           status: "ACTIVE"
         }
       },
@@ -558,5 +838,6 @@ export default {
   tokenSetRatio,
   UnionFind,
   calculateTRVForCluster,
+  resolveAttributeConflicts,
   processIdentityResolution
 };
