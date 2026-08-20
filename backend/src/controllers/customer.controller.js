@@ -259,11 +259,9 @@ const getCustomer360ById = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, customer360, "Customer 360 profile fetched successfully"));
 });
 
-// Alias export for getcustomers casing
-const getcustomers = getCustomers;
+
 
 export {
   getCustomers,
-  getcustomers,
   getCustomer360ById
 };
