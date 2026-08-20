@@ -5,13 +5,14 @@ import { ConflictReviewCard } from './components/ConflictReviewCard.jsx';
 import { AuditLogModal } from './components/AuditLogModal.jsx';
 import { LineageGraph } from './components/LineageGraph.jsx';
 import { LoginModal } from './components/LoginModal.jsx';
+import { SiloSimulator } from './components/SiloSimulator.jsx';
 import './styles/theme.css';
 import {
   Users, AlertCircle, Sparkles, SlidersHorizontal, Eye, EyeOff,
   CheckCircle2, AlertTriangle, Layers, Check, X, ShieldCheck,
   RefreshCw, MapPin, Flame, Search, Settings, Target, ShieldX,
   FileText, ShieldAlert, Network, ListFilter, Lock, LogOut, Shield,
-  Sun, Moon
+  Sun, Moon, Cpu
 } from 'lucide-react';
 import {
   Chip, MonoTag, Button, SourceBadge, ConfidenceRing, Avatar,
@@ -115,7 +116,7 @@ export default function App() {
   const handleLogout = () => {
     logSecurityEvent('AUTH_LOGOUT', `Privileged session ended for role: ${role}`);
     setRole('RELATIONSHIP_MANAGER');
-    if (activeTab === 'REVIEW' || activeTab === 'RULES') {
+    if (activeTab === 'REVIEW' || activeTab === 'RULES' || activeTab === 'SIMULATOR') {
       setActiveTab('360');
     }
   };
@@ -183,6 +184,16 @@ export default function App() {
     setOpportunities(opportunities.map((o) => (o.id === oppId ? { ...o, status: action } : o)));
   };
 
+  const handleCommitNewCustomer = (newCust) => {
+    setCustomers([newCust, ...customers]);
+    setSelectedCustomerId(newCust.goldenId);
+    logSecurityEvent(
+      'SIMULATION_INGEST',
+      `New simulated multi-silo record ingested with ID: ${newCust.goldenId} (${newCust.status})`,
+      newCust.goldenId
+    );
+  };
+
   const handleLiveRecalculate = () => {
     if (role !== 'ADMIN') return;
 
@@ -230,6 +241,7 @@ export default function App() {
     { id: '360', label: 'Customer Overview', icon: Users, count: null },
     { id: 'REVIEW', label: 'Needs Review', icon: AlertCircle, count: pendingReviews.length, tone: 'warning' },
     { id: 'OPPORTUNITIES', label: 'Top Recommendations', icon: Sparkles, count: opportunities.filter((o) => o.status === 'PENDING').length, tone: 'gold' },
+    { id: 'SIMULATOR', label: 'Silo Simulator', icon: Cpu, count: null },
     { id: 'RULES', label: 'Match Settings', icon: SlidersHorizontal, count: null },
   ];
 
@@ -246,7 +258,6 @@ export default function App() {
       }}
     >
 
-      {/* ============ Top Navigation Bar ============ */}
       {/* ============ Top Navigation Bar ============ */}
       <header style={{
         backgroundColor: '#0B1220',
@@ -790,7 +801,15 @@ export default function App() {
           </div>
         )}
 
-        {/* 4. RULES TAB */}
+        {/* 4. SILO SIMULATOR TAB */}
+        {canAccessTab(activeTab) && activeTab === 'SIMULATOR' && (
+          <SiloSimulator
+            rules={rules}
+            onCommitNewCustomer={handleCommitNewCustomer}
+          />
+        )}
+
+        {/* 5. RULES TAB */}
         {canAccessTab(activeTab) && activeTab === 'RULES' && (
           <div className="card" style={{ padding: 28 }}>
             <SectionHeading
