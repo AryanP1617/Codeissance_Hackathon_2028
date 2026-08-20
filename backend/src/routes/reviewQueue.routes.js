@@ -4,11 +4,12 @@ import {
     resolveMerge,
     resolveSplit
 } from "../controllers/reviewQueue.controller.js";
-import { verifyJwt } from "../middlewares/auth.middleware.js";
+import { verifyJwt, authorizeRoles } from "../middlewares/auth.middleware.js";
 
 const review_queue_router = Router();
 
 review_queue_router.use(verifyJwt);
+review_queue_router.use(authorizeRoles("ADMIN", "JUDGE"));
 
 review_queue_router.route("/get-pending-reviews").get(getPendingReviews);
 review_queue_router.route("/:reviewId/merge").post(resolveMerge);

@@ -10,6 +10,8 @@ import {
   evaluateAllGoldenCustomers
 } from "../services/nbo.service.js";
 import { logAuditEvent } from "../services/audit.service.js";
+import { generateCrossSellLead } from "../services/aiInsight.service.js";
+
 
 /**
  * 1. getOpportunities / getOpportuniteies (Dynamic RM Feed & Filtering)
@@ -76,7 +78,7 @@ const getOpportunities = asyncHandler(async (req, res) => {
       .limit(limitNumber)
       .populate({
         path: "goldenCustomer",
-        select: "goldenCustomerId personalProfile totalRelationshipValue riskCategory status"
+        select: "goldenCustomerId personalProfile totalRelationshipValue status"
       })
       .lean()
   ]);
@@ -125,7 +127,7 @@ const getOpportunityById = asyncHandler(async (req, res) => {
   })
     .populate({
       path: "goldenCustomer",
-      select: "goldenCustomerId personalProfile totalRelationshipValue riskCategory status"
+      select: "goldenCustomerId personalProfile totalRelationshipValue status"
     })
     .populate({
       path: "explainabilityLog.ruleId",
@@ -359,6 +361,25 @@ const recalculateCustomerOpportunities = asyncHandler(async (req, res) => {
       .status(200)
       .json(new ApiResponse(200, result, "Batch customer opportunities recalculation completed"));
   }
+});
+
+
+
+/**
+ * Generates an AI-powered next-best-opportunity insight for a given Golden Customer.
+ */
+export const getAICrossSellInsight = asyncHandler(async (req, res) => {
+  const { goldenCustomerId } = req.params;
+
+  if (!goldenCustomerId) {
+    throw new ApiError(400, "Golden Customer ID parameter is required");
+  }
+
+  const aiLead = await generateCrossSellLead(goldenCustomerId);
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, aiLead, "AI Cross-Sell insight generated successfully"));
 });
 
 export {
