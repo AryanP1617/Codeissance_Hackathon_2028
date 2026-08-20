@@ -1,45 +1,57 @@
-/**
- * Reconstructed from call sites in App.jsx and the product screenshots
- * (this file was referenced but not included in the upload). Shapes and
- * values are set to match what was shown in the UI.
- */
+export const initialRuleConfig = {
+  panWeight: 50,
+  mobileWeight: 25,
+  emailWeight: 15,
+  nameWeight: 10,
+  autoMergeThreshold: 85,
+  manualReviewThreshold: 60,
+};
 
 export const initialCustomers = [
   {
     goldenId: 'GC-1001',
     fullName: 'Aditya Sharma',
     city: 'Mumbai',
-    segment: 'HNI',
-    status: 'AUTO_MERGED',
+    segment: 'Private Wealth',
     totalRelationshipValue: 2450000,
-    pan: 'ABCPS1234F',
-    mobile: '+91-98765-43210',
-    matchConfidence: 94,
+    pan: 'ABCPS1234K',
+    mobile: '9820011223',
+    email: 'aditya.sharma@invest.in',
+    matchConfidence: 96,
+    status: 'AUTO_MERGED',
     hasConflict: true,
-    conflictField: 'Email differs across Equity (aditya.sharma@example.com) and MF (aditya.s@work.com)',
+    conflictField: 'Email discrepancy between Equity (aditya.sharma@invest.in) and Wealth (a.sharma@gmail.com)',
+    matchCriteria: [
+      { field: 'PAN', type: 'Deterministic', score: 100, passed: true, weight: 50 },
+      { field: 'Mobile', type: 'Deterministic', score: 100, passed: true, weight: 25 },
+      { field: 'Email', type: 'Probabilistic', score: 75, passed: false, weight: 15 },
+      { field: 'Name', type: 'Fuzzy', score: 98, passed: true, weight: 10 },
+    ],
     sourceRecords: [
       {
         sourceSystem: 'EQUITY',
-        sourceId: 'EQ-8821',
+        sourceId: 'EQ-8812',
         name: 'Aditya Sharma',
-        email: 'aditya.sharma@example.com',
-        mobile: '+91-98765-43210',
-        value: 1500000,
+        email: 'aditya.sharma@invest.in',
+        mobile: '9820011223',
+        value: 1200000,
       },
       {
         sourceSystem: 'MUTUAL_FUNDS',
-        sourceId: 'MF-4402',
+        sourceId: 'MF-3041',
         name: 'Aditya Sharma',
-        email: 'aditya.s@work.com',
-        mobile: '+91-98765-43210',
-        value: 950000,
+        email: 'aditya.sharma@invest.in',
+        mobile: '9820011223',
+        value: 750000,
       },
-    ],
-    matchCriteria: [
-      { field: 'PAN Number', type: 'Exact', score: 100, passed: true },
-      { field: 'Mobile Number', type: 'Exact', score: 100, passed: true },
-      { field: 'Full Name', type: 'Fuzzy', score: 96, passed: true },
-      { field: 'Email Domain', type: 'Fuzzy', score: 62, passed: false },
+      {
+        sourceSystem: 'WEALTH',
+        sourceId: 'WM-9022',
+        name: 'Aditya K. Sharma',
+        email: 'a.sharma@gmail.com',
+        mobile: '9820011223',
+        value: 500000,
+      },
     ],
   },
   {
@@ -47,36 +59,37 @@ export const initialCustomers = [
     fullName: 'Pooja Mehta',
     city: 'Bengaluru',
     segment: 'Affluent',
-    status: 'AUTO_MERGED',
     totalRelationshipValue: 850000,
-    pan: 'BXYPM5678K',
-    mobile: '+91-90210-11223',
-    matchConfidence: 91,
+    pan: 'NOT_PROVIDED',
+    mobile: '9845012345',
+    email: 'pooja.mehta@techcorp.com',
+    matchConfidence: 88,
+    status: 'AUTO_MERGED',
     hasConflict: false,
     conflictField: null,
+    matchCriteria: [
+      { field: 'PAN', type: 'Deterministic', score: 0, passed: false, weight: 50 },
+      { field: 'Mobile', type: 'Deterministic', score: 100, passed: true, weight: 25 },
+      { field: 'Email', type: 'Deterministic', score: 100, passed: true, weight: 15 },
+      { field: 'Name', type: 'Fuzzy', score: 95, passed: true, weight: 10 },
+    ],
     sourceRecords: [
       {
-        sourceSystem: 'WEALTH',
-        sourceId: 'WM-2210',
+        sourceSystem: 'MUTUAL_FUNDS',
+        sourceId: 'MF-4402',
         name: 'Pooja Mehta',
-        email: 'pooja.mehta@example.com',
-        mobile: '+91-90210-11223',
+        email: 'pooja.mehta@techcorp.com',
+        mobile: '9845012345',
         value: 550000,
       },
       {
         sourceSystem: 'INSURANCE',
-        sourceId: 'IN-1187',
-        name: 'Pooja Mehta',
-        email: 'pooja.mehta@example.com',
-        mobile: '+91-90210-11223',
+        sourceId: 'IN-7719',
+        name: 'Pooja R. Mehta',
+        email: 'pooja.mehta@techcorp.com',
+        mobile: '9845012345',
         value: 300000,
       },
-    ],
-    matchCriteria: [
-      { field: 'PAN Number', type: 'Exact', score: 100, passed: true },
-      { field: 'Mobile Number', type: 'Exact', score: 100, passed: true },
-      { field: 'Full Name', type: 'Exact', score: 100, passed: true },
-      { field: 'Email Domain', type: 'Exact', score: 88, passed: true },
     ],
   },
   {
@@ -84,13 +97,20 @@ export const initialCustomers = [
     fullName: 'Rohan Verma / Rahul Verma',
     city: 'Delhi NCR',
     segment: 'Retail',
-    status: 'MANUAL_REVIEW',
     totalRelationshipValue: 420000,
     pan: 'CVERM9012L',
-    mobile: '+91-98111-22233',
+    mobile: '9811122233',
+    email: 'verma.fam@gmail.com',
     matchConfidence: 62,
+    status: 'MANUAL_REVIEW',
     hasConflict: true,
     conflictField: 'Name mismatch on identical mobile (Rohan Verma vs Rahul Verma)',
+    matchCriteria: [
+      { field: 'PAN', type: 'Deterministic', score: 0, passed: false, weight: 50 },
+      { field: 'Mobile', type: 'Deterministic', score: 100, passed: true, weight: 25 },
+      { field: 'Email', type: 'Probabilistic', score: 80, passed: true, weight: 15 },
+      { field: 'Name', type: 'Fuzzy', score: 45, passed: false, weight: 10 },
+    ],
     sourceRecords: [
       {
         sourceSystem: 'LOANS',
@@ -109,18 +129,12 @@ export const initialCustomers = [
         value: 120000,
       },
     ],
-    matchCriteria: [
-      { field: 'PAN Number', type: 'Not on file', score: 0, passed: false },
-      { field: 'Mobile Number', type: 'Exact', score: 100, passed: true },
-      { field: 'Full Name', type: 'Fuzzy', score: 48, passed: false },
-      { field: 'Email Domain', type: 'Exact', score: 100, passed: true },
-    ],
   },
 ];
 
 export const initialOpportunities = [
   {
-    id: 'OPP-1',
+    id: 'OPP-101',
     goldenId: 'GC-1001',
     customerName: 'Aditya Sharma',
     targetProduct: 'Term Life Insurance (₹1.5 Cr Cover)',
@@ -130,18 +144,13 @@ export const initialOpportunities = [
     status: 'PENDING',
   },
   {
-    id: 'OPP-2',
+    id: 'OPP-102',
     goldenId: 'GC-1002',
     customerName: 'Pooja Mehta',
     targetProduct: 'Multi-Cap Equity Portfolio Migration',
-    triggerReason: 'Customer holds ₹8.5L in low-yield wealth/insurance; eligible for equity investments.',
+    triggerReason: 'Customer holds ₹8.5L in low-yield wealth/insurance; eligible for high-growth equity accounts.',
     score: 82,
     potentialValue: 75000,
     status: 'PENDING',
   },
 ];
-
-export const initialRuleConfig = {
-  autoMergeThreshold: 85,
-  manualReviewThreshold: 60,
-};

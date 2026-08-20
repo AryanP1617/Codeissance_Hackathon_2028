@@ -146,14 +146,17 @@ export function Avatar({ name, size = 40, tone = 'brand' }) {
   );
 }
 
-export function RangeSlider({ value, min, max, onChange, trackTone = 'var(--brand-700)' }) {
-  const pct = ((value - min) / (max - min)) * 100;
+export function RangeSlider({ value = 0, min = 0, max = 100, onChange, disabled, trackTone = 'var(--brand-700)' }) {
+  const safeVal = Number(value) || 0;
+  const pct = Math.max(0, Math.min(100, ((safeVal - min) / (max - min)) * 100));
+
   return (
     <input
       type="range"
       min={min}
       max={max}
-      value={value}
+      value={safeVal}
+      disabled={disabled}
       onChange={onChange}
       className="range-input"
       style={{
