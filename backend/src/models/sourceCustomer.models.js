@@ -17,18 +17,55 @@ const sourceCustomerSchema = new mongoose.Schema(
     rawAttributes: {
       fullName: { type: String, trim: true },
       cleanFullName: { type: String, trim: true },
+      pan: { type: String, uppercase: true, trim: true, index: true },
+      mobile: { type: String, trim: true },
+      cleanPhone: { type: String, trim: true },
       email: { type: String, lowercase: true, trim: true },
       cleanEmail: { type: String, lowercase: true, trim: true },
-      phone: { type: String, trim: true },
-      cleanPhone: { type: String, trim: true },
-      pan: { type: String, uppercase: true, trim: true, index: true },
-      dob: Date,
-      address: String,
-      city: String,
-      state: String,
-      pincode: String,
-      kycStatus: String,
-      rawPayload: mongoose.Schema.Types.Mixed
+      city: { type: String, trim: true },
+      dateOfBirth: { type: mongoose.Schema.Types.Mixed },
+      dob: { type: Date },
+      rawPayload: { type: mongoose.Schema.Types.Mixed }
+    },
+    holdingsData: {
+      // Equity domain specific fields
+      accountNumber: String,
+      portfolioValue: Number,
+      activeHoldings: [String],
+
+      // Mutual Funds domain specific fields
+      folioNumber: String,
+      totalNavValue: Number,
+      schemeCount: Number,
+      sipActive: Boolean,
+
+      // Insurance domain specific fields
+      policyNumber: String,
+      policyType: {
+        type: String,
+        enum: ["TERM", "HEALTH", "LIFE", "VEHICLE", "OTHER"]
+      },
+      sumAssured: Number,
+      status: {
+        type: String,
+        enum: ["ACTIVE", "LAPSED", "EXPIRED", "CANCELLED"]
+      },
+
+      // Loans domain specific fields
+      loanNumber: String,
+      loanType: {
+        type: String,
+        enum: ["HOME", "PERSONAL", "AUTO", "BUSINESS", "EDUCATION"]
+      },
+      sanctionedAmount: Number,
+      outstandingAmount: Number,
+      emiAmount: Number,
+      daysPastDue: Number,
+
+      // Wealth domain specific fields
+      aum: Number,
+      pmsActive: Boolean,
+      idleCash: Number
     },
     domainHoldings: {
       equityHoldings: [

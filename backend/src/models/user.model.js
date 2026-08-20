@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema(
     },
     assignedGoldenCustomerIds: [
       {
-        type: String // For RM role isolation: goldenCustomerIds assigned to this RM
+        type: String
       }
     ],
     refreshToken: {
@@ -51,56 +51,67 @@ const userSchema = new mongoose.Schema(
 );
 
 // Pre-save hook to hash password and refreshToken before saving to database
-userSchema.pre("save", async function (next) {
-  try {
-    if (this.isModified("password")) {
-      this.password = await bcrypt.hash(this.password, 10);
-    }
-
-    next();
-  } catch (error) {
-    next(error);
+userSchema.pre("save", async function () {
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 10);
   }
+
 });
 
-// Method to verify password match
+// Method to verify candidate password match
 userSchema.methods.isPasswordCorrect = async function (password) {
-  return await bcrypt.compare(password, this.password);
+  try {
+    return await bcrypt.compare(password, this.password);
+  } catch (error) {
+    throw new Error(`Password verification failed: ${error.message}`);
+  }
 };
 
-// Method to verify refresh token match
+// Method to verify candidate refresh token match
 userSchema.methods.isRefreshTokenCorrect = async function (refreshToken) {
-  if (!this.refreshToken) return false;
-  return await bcrypt.compare(refreshToken, this.refreshToken);
+  try {
+    if (!this.refreshToken) return false;
+    return await bcrypt.compare(refreshToken, this.refreshToken);
+  } catch (error) {
+    throw new Error(`Refresh token verification failed: ${error.message}`);
+  }
 };
 
-// Method to generate Access Token
+// Method to generate JWT Access Token
 userSchema.methods.generateAccessToken = function () {
-  return jwt.sign(
-    {
-      _id: this._id,
-      email: this.email,
-      username: this.username,
-      role: this.role
-    },
-    process.env.ACCESS_TOKEN_SECRET || "ACCESS_TOKEN_SECRET_DEFAULT",
-    {
-      expiresIn: process.env.ACCESS_TOKEN_EXPIRY || "1d"
-    }
-  );
+  try {
+    return jwt.sign(
+      {
+        _id: this._id,
+        email: this.email,
+        username: this.username,
+        role: this.role
+      },
+      process.env.ACCESS_TOKEN_SECRET || "ACCESS_TOKEN_SECRET_DEFAULT",
+      {
+        expiresIn: process.env.ACCESS_TOKEN_EXPIRY || "1d"
+      }
+    );
+  } catch (error) {
+    throw new Error(`Access token generation failed: ${error.message}`);
+  }
 };
 
-// Method to generate Refresh Token
+// Method to generate JWT Refresh Token
 userSchema.methods.generateRefreshToken = function () {
-  return jwt.sign(
-    {
-      _id: this._id
-    },
-    process.env.REFRESH_TOKEN_SECRET || "REFRESH_TOKEN_SECRET_DEFAULT",
-    {
-      expiresIn: process.env.REFRESH_TOKEN_EXPIRY || "10d"
-    }
-  );
+  try {
+    return jwt.sign(
+      {
+        _id: this._id
+      },
+      process.env.REFRESH_TOKEN_SECRET || "REFRESH_TOKEN_SECRET_DEFAULT",
+      {
+        expiresIn: process.env.REFRESH_TOKEN_EXPIRY || "10d"
+      }
+    );
+  } catch (error) {
+    throw new Error(`Refresh token generation failed: ${error.message}`);
+  }
 };
 
 userSchema.plugin(mongooseAggregatePaginate);

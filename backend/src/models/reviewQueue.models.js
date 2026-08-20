@@ -48,10 +48,10 @@ const reviewQueueSchema = new mongoose.Schema(
     },
     matchBreakdown: [
       {
-        attribute: { type: String, required: true }, // e.g. "fullName", "email", "phone", "address"
-        score: { type: Number, required: true },
-        weight: { type: Number, default: 1 },
-        algorithm: { type: String, default: "Jaro-Winkler" } // e.g. Levenshtein, Jaro-Winkler, Exact
+        attribute: String,
+        score: Number,
+        weight: Number,
+        algorithm: String
       }
     ],
     ambiguityReason: {
