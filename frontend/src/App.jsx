@@ -247,9 +247,10 @@ export default function App() {
     >
 
       {/* ============ Top Navigation Bar ============ */}
+      {/* ============ Top Navigation Bar ============ */}
       <header style={{
-        backgroundColor: 'var(--brand-900)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        backgroundColor: '#0B1220',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
         padding: '18px 36px',
         color: '#E7ECF7',
       }}>
@@ -267,12 +268,12 @@ export default function App() {
               width: '46px',
               height: '46px',
               borderRadius: '12px',
-              background: 'linear-gradient(135deg, var(--brand-600) 0%, var(--brand-700) 100%)',
-              border: '1px solid rgba(255, 255, 255, 0.15)',
+              background: 'linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.25)',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.35)',
               flexShrink: 0
             }}>
               <Target size={24} color="#ffffff" strokeWidth={2.4} />
@@ -285,14 +286,15 @@ export default function App() {
                 color: '#ffffff',
                 margin: 0,
                 letterSpacing: '-0.02em',
+                lineHeight: 1.2,
               }}>
                 Customer 360 &amp; NBO Engine
               </h1>
               <p style={{
                 fontSize: '14px',
-                color: '#94a3b8',
+                color: '#94A3B8',
                 margin: '4px 0 0 0',
-                fontWeight: '400',
+                fontWeight: 400,
               }}>
                 Stitch customer profiles, resolve duplicate accounts, and surface cross-sell recommendations.
               </p>
@@ -300,7 +302,7 @@ export default function App() {
           </div>
 
           {/* Controls: Theme Toggle, Audit Trail, PII Masking, & Auth */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             
             {/* Dark / Light Theme Toggle Button */}
             <button
@@ -310,10 +312,10 @@ export default function App() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: '38px',
-                height: '38px',
+                width: '40px',
+                height: '40px',
                 borderRadius: '8px',
-                border: '1px solid rgba(255, 255, 255, 0.16)',
+                border: '1px solid rgba(255, 255, 255, 0.18)',
                 backgroundColor: 'rgba(255, 255, 255, 0.08)',
                 color: theme === 'dark' ? '#FBBF24' : '#E2E8F0',
                 cursor: 'pointer',
@@ -330,7 +332,7 @@ export default function App() {
                 className="btn-quiet"
                 style={{
                   background: 'rgba(255, 255, 255, 0.08)',
-                  border: '1px solid rgba(255, 255, 255, 0.16)',
+                  border: '1px solid rgba(255, 255, 255, 0.18)',
                   color: '#ffffff',
                   cursor: 'pointer',
                   display: 'flex',
@@ -345,7 +347,7 @@ export default function App() {
                 <FileText size={15} color="#38bdf8" />
                 <span>Audit Trail</span>
                 <span style={{
-                  background: 'rgba(56, 189, 248, 0.2)',
+                  background: 'rgba(56, 189, 248, 0.25)',
                   color: '#38bdf8',
                   borderRadius: '10px',
                   padding: '2px 7px',
@@ -369,13 +371,13 @@ export default function App() {
                 fontSize: '13.5px',
                 fontWeight: 600,
                 border: '1px solid rgba(255, 255, 255, 0.18)',
-                backgroundColor: showMasked ? 'rgba(239, 68, 68, 0.15)' : 'rgba(255, 255, 255, 0.08)',
-                color: showMasked ? '#fca5a5' : '#e2e8f0',
+                backgroundColor: showMasked ? 'rgba(239, 68, 68, 0.2)' : 'rgba(255, 255, 255, 0.08)',
+                color: showMasked ? '#FCA5A5' : '#E2E8F0',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
               }}
             >
-              {showMasked ? <EyeOff size={15} color="#f87171" /> : <Eye size={15} color="#94a3b8" />}
+              {showMasked ? <EyeOff size={15} color="#F87171" /> : <Eye size={15} color="#94A3B8" />}
               <span>{showMasked ? 'Mask sensitive info' : 'Show full info'}</span>
             </button>
 
@@ -391,9 +393,9 @@ export default function App() {
                   borderRadius: '6px',
                   fontSize: '13.5px',
                   fontWeight: 600,
-                  border: '1px solid #38bdf8',
-                  backgroundColor: 'rgba(56, 189, 248, 0.12)',
-                  color: '#38bdf8',
+                  border: '1px solid #38BDF8',
+                  backgroundColor: 'rgba(56, 189, 248, 0.14)',
+                  color: '#38BDF8',
                   cursor: 'pointer',
                   transition: 'all 0.15s ease',
                 }}
@@ -406,15 +408,15 @@ export default function App() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '10px',
-                background: 'rgba(0, 0, 0, 0.3)',
+                background: 'rgba(0, 0, 0, 0.35)',
                 padding: '5px 8px 5px 14px',
                 borderRadius: '8px',
-                border: '1px solid rgba(56, 189, 248, 0.3)',
+                border: '1px solid rgba(56, 189, 248, 0.35)',
               }}>
                 <span className="mono" style={{
                   fontSize: '12px',
                   fontWeight: 700,
-                  color: '#38bdf8',
+                  color: '#38BDF8',
                   letterSpacing: '0.04em',
                 }}>
                   ● {role === 'ADMIN' ? 'ADMINISTRATOR' : 'DATA STEWARD'}
@@ -423,9 +425,9 @@ export default function App() {
                   onClick={handleLogout}
                   title="Exit privileged session"
                   style={{
-                    background: 'rgba(239, 68, 68, 0.18)',
-                    border: '1px solid rgba(239, 68, 68, 0.3)',
-                    color: '#fca5a5',
+                    background: 'rgba(239, 68, 68, 0.25)',
+                    border: '1px solid rgba(239, 68, 68, 0.35)',
+                    color: '#FCA5A5',
                     borderRadius: '6px',
                     padding: '6px 10px',
                     fontSize: '12px',

@@ -44,7 +44,7 @@
   --danger-100: #FBEAE8;
   --danger-line: #F0C4C0;
 
-  /* ---- Type ---- */
+  /* ---- Type: Pure Inter ---- */
   --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
@@ -58,55 +58,54 @@
 }
 
 /* ==========================================================================
-   Dark Theme Token Overrides
+   High-Contrast Dark Theme Tokens
    ========================================================================== */
 [data-theme="dark"] {
-  /* ---- Neutrals (Deep Obsidian / Slate) ---- */
+  /* ---- Neutrals (Clear text & refined surfaces) ---- */
   --ink-900: #F8FAFC;
-  --ink-700: #CBD5E1;
+  --ink-700: #E2E8F0;
   --ink-500: #94A3B8;
   --ink-400: #64748B;
   --ink-300: #475569;
   --line-300: #334155;
   --line-200: #1E293B;
-  --line-100: #141E33;
+  --line-100: #172033;
   --surface: #0F172A;
-  --surface-sunk: #070D19;
-  --canvas: #030712;
+  --surface-sunk: #162032;
+  --canvas: #090E17;
 
-  /* ---- Brand & Accents in Dark Mode ---- */
-  --brand-900: #040914;
-  --brand-800: #0B1933;
-  --brand-700: #1D4ED8;
-  --brand-600: #2563EB;
-  --brand-500: #3B82F6;
-  --brand-100: rgba(59, 130, 246, 0.2);
-  --brand-050: rgba(59, 130, 246, 0.12);
+  /* ---- Brand & Accents (Keep header deep navy) ---- */
+  --brand-900: #0B1220;
+  --brand-800: #93C5FD;
+  --brand-700: #60A5FA;
+  --brand-600: #3B82F6;
+  --brand-500: #60A5FA;
+  --brand-100: rgba(96, 165, 250, 0.22);
+  --brand-050: rgba(59, 130, 246, 0.14);
 
-  --gold-700: #FBBF24;
+  --gold-700: #FDE68A;
   --gold-500: #F59E0B;
-  --gold-100: rgba(245, 158, 11, 0.16);
+  --gold-100: rgba(245, 158, 11, 0.18);
 
-  /* ---- Semantic Status in Dark Mode ---- */
-  --success-700: #34D399;
-  --success-500: #10B981;
-  --success-100: rgba(16, 185, 129, 0.16);
-  --success-line: rgba(16, 185, 129, 0.35);
+  /* ---- Status ---- */
+  --success-700: #86EFAC;
+  --success-500: #22C55E;
+  --success-100: rgba(34, 197, 94, 0.18);
+  --success-line: rgba(34, 197, 94, 0.35);
 
-  --warning-700: #FBBF24;
+  --warning-700: #FDE68A;
   --warning-500: #F59E0B;
-  --warning-100: rgba(245, 158, 11, 0.16);
+  --warning-100: rgba(245, 158, 11, 0.18);
   --warning-line: rgba(245, 158, 11, 0.35);
 
-  --danger-700: #F87171;
+  --danger-700: #FCA5A5;
   --danger-500: #EF4444;
-  --danger-100: rgba(239, 68, 68, 0.16);
+  --danger-100: rgba(239, 68, 68, 0.18);
   --danger-line: rgba(239, 68, 68, 0.35);
 
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.6);
-  --shadow-raised: 0 8px 24px rgba(0, 0, 0, 0.8);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-raised: 0 10px 25px rgba(0, 0, 0, 0.7);
 }
-
 * { box-sizing: border-box; }
 
 html, body {
@@ -158,11 +157,11 @@ body {
 .btn:active { transform: translateY(0.5px); }
 .btn:disabled { cursor: not-allowed; opacity: 0.55; }
 
-.btn-primary { background: var(--brand-700); border-color: var(--brand-700); color: #fff; }
-.btn-primary:hover:not(:disabled) { background: var(--brand-800); border-color: var(--brand-800); }
+.btn-primary { background: var(--brand-600); border-color: var(--brand-600); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--brand-500); border-color: var(--brand-500); }
 
-.btn-success { background: var(--success-700); border-color: var(--success-700); color: #fff; }
-.btn-success:hover:not(:disabled) { background: #0A5A37; border-color: #0A5A37; }
+.btn-success { background: #15803D; border-color: #15803D; color: #fff; }
+.btn-success:hover:not(:disabled) { background: #16A34A; border-color: #16A34A; }
 
 .btn-outline-danger { background: var(--surface); border-color: var(--danger-line); color: var(--danger-700); }
 .btn-outline-danger:hover:not(:disabled) { background: var(--danger-100); }
@@ -269,7 +268,7 @@ body {
   transition: border-color .12s ease, background-color .12s ease;
 }
 .customer-row:hover { border-color: var(--brand-500); }
-.customer-row.is-selected { background: var(--brand-050); border-color: var(--brand-600); box-shadow: inset 0 0 0 1px var(--brand-600); }
+.customer-row.is-selected { background: var(--brand-050); border-color: var(--brand-500); box-shadow: inset 0 0 0 1px var(--brand-500); }
 
 /* ---- Range slider ---- */
 .range-input {
