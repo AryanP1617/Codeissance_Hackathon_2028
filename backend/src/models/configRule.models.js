@@ -34,19 +34,19 @@ const configRuleSchema = new mongoose.Schema(
       reviewQueueMinThreshold: { type: Number, default: 0.60 },
       attributeWeights: {
         pan: { type: Number, default: 1.0 },
-        fullName: { type: Number, default: 0.3 },
-        email: { type: Number, default: 0.25 },
-        phone: { type: Number, default: 0.25 },
-        address: { type: Number, default: 0.2 }
+        fullName: { type: Number, default: 0.35 },
+        email: { type: Number, default: 0.30 },
+        phone: { type: Number, default: 0.35 },
+        address: { type: Number, default: 0.20 }
       },
       fuzzyAlgorithms: {
-        nameMatching: { type: String, default: "Jaro-Winkler" },
+        nameMatching: { type: String, default: "TokenSetRatio" },
         addressMatching: { type: String, default: "Levenshtein" }
       }
     },
     precedenceConfig: [
       {
-        attribute: { type: String, required: true }, // e.g. "email", "address", "phone"
+        attribute: String,
         priorityOrder: [
           {
             type: String,

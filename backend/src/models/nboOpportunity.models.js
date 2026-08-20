@@ -46,16 +46,19 @@ const nboOpportunitySchema = new mongoose.Schema(
     },
     reasonCodes: [
       {
-        code: { type: String, required: true }, // e.g. "HIGH_EQUITY_ZERO_INSURANCE"
-        description: { type: String, required: true },
+        code: String,
+        description: String,
         triggerAttribute: String,
         sourceValue: mongoose.Schema.Types.Mixed
       }
     ],
     explainabilityLog: {
-      gapIdentified: { type: String, required: true },
-      ruleApplied: { type: String, required: true },
-      ruleId: { type: mongoose.Schema.Types.ObjectId, ref: "ConfigRule" },
+      gapIdentified: String,
+      ruleApplied: String,
+      ruleId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ConfigRule"
+      },
       formulaDetails: String,
       inputMetrics: mongoose.Schema.Types.Mixed
     },

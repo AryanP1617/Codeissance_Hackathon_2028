@@ -16,10 +16,15 @@ const goldenCustomerSchema = new mongoose.Schema(
     },
     personalProfile: {
       fullName: { type: String, required: true, trim: true },
-      dob: { type: Date },
-      gender: { type: String, enum: ["MALE", "FEMALE", "OTHER", "UNSPECIFIED"], default: "UNSPECIFIED" },
       primaryEmail: { type: String, lowercase: true, trim: true, index: true },
       primaryPhone: { type: String, trim: true, index: true },
+      dob: Date,
+      city: String,
+      gender: {
+        type: String,
+        enum: ["MALE", "FEMALE", "OTHER", "UNSPECIFIED"],
+        default: "UNSPECIFIED"
+      },
       addresses: [
         {
           type: { type: String, default: "RESIDENTIAL" },
@@ -40,14 +45,18 @@ const goldenCustomerSchema = new mongoose.Schema(
           enum: ["EQUITY", "MUTUAL_FUNDS", "INSURANCE", "LOANS", "WEALTH"]
         },
         sourceCustomerId: { type: String, required: true },
-        sourceRecordRef: { type: mongoose.Schema.Types.ObjectId, ref: "SourceCustomer" },
-        linkedAt: { type: Date, default: Date.now },
+        sourceRecordRef: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "SourceCustomer",
+          required: true
+        },
         matchType: {
           type: String,
           enum: ["DETERMINISTIC", "PROBABILISTIC", "MANUAL_MERGE"],
           required: true
         },
-        confidenceScore: { type: Number, required: true }
+        confidenceScore: { type: Number, required: true },
+        linkedAt: { type: Date, default: Date.now }
       }
     ],
     totalRelationshipValue: {
@@ -63,7 +72,7 @@ const goldenCustomerSchema = new mongoose.Schema(
     },
     attributeConflicts: [
       {
-        attribute: { type: String, required: true }, // e.g. "primaryEmail", "primaryPhone", "address"
+        attribute: { type: String, required: true },
         competingValues: [
           {
             value: mongoose.Schema.Types.Mixed,

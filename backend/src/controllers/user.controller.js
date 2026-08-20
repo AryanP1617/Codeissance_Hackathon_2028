@@ -13,8 +13,8 @@ const generateAccessAndRefreshTokens = async (userId) => {
       throw new ApiError(404, "User not found");
     }
 
-    const accessToken = user.generateAccessToken();
-    const refreshToken = user.generateRefreshToken();
+    const accessToken = await user.generateAccessToken();
+    const refreshToken = await user.generateRefreshToken();
 
     user.refreshToken = refreshToken;
     await user.save({ validateBeforeSave: false });
@@ -33,10 +33,10 @@ const generateAccessAndRefreshTokens = async (userId) => {
  * Register a new user
  */
 const registerUser = asyncHandler(async (req, res) => {
-  const { username, email, fullName, password, role, assignedGoldenCustomerIds } = req.body;
+  const { email, password, role, assignedGoldenCustomerIds } = req.body;
 
   if (
-    [username, email, fullName, password].some(
+    [email, password].some(
       (field) => !field || (typeof field === "string" && field.trim() === "")
     )
   ) {
@@ -75,9 +75,9 @@ const registerUser = asyncHandler(async (req, res) => {
  * Login existing user
  */
 const loginUser = asyncHandler(async (req, res) => {
-  const { email, username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username && !email) {
+  if (!email) {
     throw new ApiError(400, "Username or email is required");
   }
 
@@ -85,12 +85,7 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Password is required");
   }
 
-  const user = await User.findOne({
-    $or: [
-      { username: username ? username.toLowerCase() : "" },
-      { email: email ? email.toLowerCase() : "" }
-    ]
-  });
+  const user = await User.findOne({ email })
 
   if (!user) {
     throw new ApiError(404, "User does not exist");

@@ -1,0 +1,318 @@
+[
+    {
+        "sourceSystem": "EQUITY",
+        "sourceCustomerId": "DEMO_EQ_01",
+        "rawAttributes": {
+            "fullName": "Aarav Sharma",
+            "pan": "ABXPS1234K",
+            "mobile": "+91 98765-43210",
+            "email": "aarav.sharma@gmail.com",
+            "city": "Mumbai",
+            "dateOfBirth": "1990-04-15"
+        },
+        "holdingsData": {
+            "accountNumber": "EQACC01",
+            "portfolioValue": 1250000,
+            "activeHoldings": [
+                "RELIANCE",
+                "TCS",
+                "HDFCBANK"
+            ]
+        },
+        "domainHoldings": {
+            "equityHoldings": [
+                {
+                    "symbol": "RELIANCE",
+                    "companyName": "Reliance Industries",
+                    "quantity": 200,
+                    "currentValue": 650000
+                },
+                {
+                    "symbol": "TCS",
+                    "companyName": "TCS",
+                    "quantity": 150,
+                    "currentValue": 600000
+                }
+            ]
+        }
+    },
+    {
+        "sourceSystem": "MUTUAL_FUNDS",
+        "sourceCustomerId": "DEMO_MF_01",
+        "rawAttributes": {
+            "fullName": "Aarav S Sharma",
+            "pan": "ABXPS1234K",
+            "mobile": "9876543210",
+            "email": "aarav.sharma@acmecorp.in",
+            "city": "Mumbai",
+            "dateOfBirth": "1990-04-15"
+        },
+        "holdingsData": {
+            "folioNumber": "MFOLIO01",
+            "totalNavValue": 980000,
+            "schemeCount": 3,
+            "sipActive": true
+        },
+        "domainHoldings": {
+            "mfHoldings": [
+                {
+                    "folioNumber": "MFOLIO01",
+                    "schemeName": "HDFC Top 100",
+                    "currentValue": 980000,
+                    "sipActive": true
+                }
+            ]
+        }
+    },
+    {
+        "sourceSystem": "EQUITY",
+        "sourceCustomerId": "DEMO_EQ_02",
+        "rawAttributes": {
+            "fullName": "Priya Venkatesh Nair",
+            "pan": null,
+            "mobile": "9820012345",
+            "email": "priya.nair@gmail.com",
+            "city": "Bengaluru",
+            "dateOfBirth": "1988-07-21"
+        },
+        "holdingsData": {
+            "accountNumber": "EQACC02",
+            "portfolioValue": 820000,
+            "activeHoldings": [
+                "INFY",
+                "WIPRO"
+            ]
+        }
+    },
+    {
+        "sourceSystem": "MUTUAL_FUNDS",
+        "sourceCustomerId": "DEMO_MF_02",
+        "rawAttributes": {
+            "fullName": "Priya V. Nair",
+            "pan": null,
+            "mobile": "+91 98200-12345",
+            "email": "priya.nair@gmail.com",
+            "city": "Bengaluru",
+            "dateOfBirth": "1988-07-21"
+        },
+        "holdingsData": {
+            "folioNumber": "MFOLIO02",
+            "totalNavValue": 620000,
+            "schemeCount": 2,
+            "sipActive": true
+        }
+    },
+    {
+        "sourceSystem": "INSURANCE",
+        "sourceCustomerId": "DEMO_INS_03",
+        "rawAttributes": {
+            "fullName": "Vikram Desai",
+            "pan": null,
+            "mobile": "9811122233",
+            "email": "v.desai@corporate.com",
+            "city": "Ahmedabad",
+            "dateOfBirth": "1979-09-12"
+        },
+        "holdingsData": {
+            "policyNumber": "POL03",
+            "policyType": "LIFE",
+            "sumAssured": 5000000,
+            "status": "ACTIVE"
+        }
+    },
+    {
+        "sourceSystem": "LOANS",
+        "sourceCustomerId": "DEMO_LN_03",
+        "rawAttributes": {
+            "fullName": "Vickram M Desai",
+            "pan": null,
+            "mobile": "9811122233",
+            "email": "desai.vikram79@gmail.com",
+            "city": "Ahmedabad",
+            "dateOfBirth": "1979-09-12"
+        },
+        "holdingsData": {
+            "loanNumber": "LOAN03",
+            "loanType": "HOME",
+            "sanctionedAmount": 4000000,
+            "outstandingAmount": 3500000,
+            "emiAmount": 42000,
+            "daysPastDue": 0
+        }
+    },
+    {
+        "sourceSystem": "EQUITY",
+        "sourceCustomerId": "DEMO_EQ_04A",
+        "rawAttributes": {
+            "fullName": "Rohan Mehta",
+            "pan": "EFTRM3456P",
+            "mobile": "9988776655",
+            "email": "rohan.mehta@gmail.com",
+            "city": "Pune",
+            "dateOfBirth": "1985-11-03"
+        },
+        "holdingsData": {
+            "accountNumber": "EQACC04A",
+            "portfolioValue": 2100000,
+            "activeHoldings": [
+                "SBIN",
+                "LT"
+            ]
+        }
+    },
+    {
+        "sourceSystem": "WEALTH",
+        "sourceCustomerId": "DEMO_WL_04B",
+        "rawAttributes": {
+            "fullName": "Anjali Mehta",
+            "pan": "GHJKM9876Q",
+            "mobile": "9988776655",
+            "email": "anjali.mehta@gmail.com",
+            "city": "Pune",
+            "dateOfBirth": "1987-03-22"
+        },
+        "holdingsData": {
+            "accountNumber": "WLACC04B",
+            "aum": 1500000,
+            "pmsActive": false,
+            "idleCash": 200000
+        }
+    },
+    {
+        "sourceSystem": "EQUITY",
+        "sourceCustomerId": "DEMO_EQ_05",
+        "rawAttributes": {
+            "fullName": "Siddharth Kulkarni",
+            "pan": "VWASK0123W",
+            "mobile": "9444455555",
+            "email": "sid.kulkarni@gmail.com",
+            "city": "Pune",
+            "dateOfBirth": "1986-08-30"
+        },
+        "holdingsData": {
+            "accountNumber": "EQACC05",
+            "portfolioValue": 3500000,
+            "activeHoldings": [
+                "TCS",
+                "INFY",
+                "RELIANCE"
+            ]
+        }
+    },
+    {
+        "sourceSystem": "WEALTH",
+        "sourceCustomerId": "DEMO_WL_06",
+        "rawAttributes": {
+            "fullName": "Aditya Rao",
+            "pan": "QRDAR8901U",
+            "mobile": "9222233333",
+            "email": "aditya.rao@gmail.com",
+            "city": "Hyderabad",
+            "dateOfBirth": "1984-12-17"
+        },
+        "holdingsData": {
+            "accountNumber": "WLACC06",
+            "aum": 4500000,
+            "pmsActive": true,
+            "idleCash": 500000
+        }
+    },
+    {
+        "sourceSystem": "LOANS",
+        "sourceCustomerId": "DEMO_LN_07",
+        "rawAttributes": {
+            "fullName": "Sneha Iyer",
+            "pan": "GHYSI4567Q",
+            "mobile": "9876501234",
+            "email": "sneha.iyer@gmail.com",
+            "city": "Chennai",
+            "dateOfBirth": "1992-02-18"
+        },
+        "holdingsData": {
+            "loanNumber": "LOAN07",
+            "loanType": "HOME",
+            "sanctionedAmount": 6500000,
+            "outstandingAmount": 6100000,
+            "emiAmount": 69000,
+            "daysPastDue": 0
+        }
+    },
+    {
+        "sourceSystem": "EQUITY",
+        "sourceCustomerId": "DEMO_EQ_07",
+        "rawAttributes": {
+            "fullName": "Sneha Iyer",
+            "pan": "GHYSI4567Q",
+            "mobile": "9876501234",
+            "email": "sneha.iyer@gmail.com",
+            "city": "Chennai",
+            "dateOfBirth": "1992-02-18"
+        },
+        "holdingsData": {
+            "accountNumber": "EQACC07",
+            "portfolioValue": 1800000,
+            "activeHoldings": [
+                "HDFCBANK",
+                "TITAN"
+            ]
+        }
+    },
+    {
+        "sourceSystem": "EQUITY",
+        "sourceCustomerId": "DEMO_EQ_08",
+        "rawAttributes": {
+            "fullName": "Karan Malhotra",
+            "pan": "MNKPM6789S",
+            "mobile": "9000011111",
+            "email": "karan.malhotra@gmail.com",
+            "city": "Delhi",
+            "dateOfBirth": "1987-04-09"
+        },
+        "holdingsData": {
+            "accountNumber": "EQACC08",
+            "portfolioValue": 800000,
+            "activeHoldings": [
+                "ITC",
+                "ONGC"
+            ]
+        }
+    },
+    {
+        "sourceSystem": "MUTUAL_FUNDS",
+        "sourceCustomerId": "DEMO_MF_09",
+        "rawAttributes": {
+            "fullName": "Neha Kapoor",
+            "pan": "OPQNK7890T",
+            "mobile": "9111122222",
+            "email": "neha.kapoor@gmail.com",
+            "city": "Gurugram",
+            "dateOfBirth": "1991-06-25"
+        },
+        "holdingsData": {
+            "folioNumber": "MFOLIO09",
+            "totalNavValue": 1200000,
+            "schemeCount": 4,
+            "sipActive": true
+        }
+    },
+    {
+        "sourceSystem": "LOANS",
+        "sourceCustomerId": "DEMO_LN_10",
+        "rawAttributes": {
+            "fullName": "Manish Verma",
+            "pan": "YZMVP2345Y",
+            "mobile": "9666677777",
+            "email": "manish.verma@gmail.com",
+            "city": "Jaipur",
+            "dateOfBirth": "1981-05-20"
+        },
+        "holdingsData": {
+            "loanNumber": "LOAN10",
+            "loanType": "AUTO",
+            "sanctionedAmount": 1100000,
+            "outstandingAmount": 540000,
+            "emiAmount": 24000,
+            "daysPastDue": 72
+        }
+    }
+]
