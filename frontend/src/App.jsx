@@ -6,6 +6,7 @@ import { AuditLogModal } from './components/AuditLogModal.jsx';
 import { LineageGraph } from './components/LineageGraph.jsx';
 import { LoginModal } from './components/LoginModal.jsx';
 import { SiloSimulator } from './components/SiloSimulator.jsx';
+import { LoginPage } from './components/LoginPage.jsx';
 import './styles/theme.css';
 import {
   Users, AlertCircle, Sparkles, SlidersHorizontal, Eye, EyeOff,
@@ -56,6 +57,8 @@ const INITIAL_AUDIT_LOGS = [
 ];
 
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
   const [role, setRole] = useState('RELATIONSHIP_MANAGER');
   const [activeTab, setActiveTab] = useState('360');
   const [theme, setTheme] = useState('light');
@@ -108,8 +111,26 @@ export default function App() {
     setAuditLogs((prev) => [newEntry, ...prev]);
   };
 
+  const handleLogin = ({ role: newRole, username }) => {
+    setRole(newRole);
+    setCurrentUser({ username, role: newRole });
+    setIsAuthenticated(true);
+    logSecurityEvent('AUTH_LOGIN', `Session established for ${username} (${newRole})`);
+  };
+
+  const handleFullLogout = () => {
+    logSecurityEvent('AUTH_LOGOUT', `Session ended for ${currentUser?.username || role}`);
+    setIsAuthenticated(false);
+    setCurrentUser(null);
+    setRole('RELATIONSHIP_MANAGER');
+    setActiveTab('360');
+  };
+
   const handleLoginSuccess = (elevatedRole) => {
     setRole(elevatedRole);
+    if (currentUser) {
+      setCurrentUser({ ...currentUser, role: elevatedRole });
+    }
     logSecurityEvent('AUTH_LOGIN', `Privileged session established for role: ${elevatedRole}`);
   };
 
@@ -244,6 +265,16 @@ export default function App() {
     { id: 'SIMULATOR', label: 'Silo Simulator', icon: Cpu, count: null },
     { id: 'RULES', label: 'Match Settings', icon: SlidersHorizontal, count: null },
   ];
+
+  if (!isAuthenticated) {
+    return (
+      <LoginPage
+        onLogin={handleLogin}
+        theme={theme}
+        toggleTheme={toggleTheme}
+      />
+    );
+  }
 
   return (
     <div
@@ -392,67 +423,77 @@ export default function App() {
               <span>{showMasked ? 'Mask sensitive info' : 'Show full info'}</span>
             </button>
 
-            {/* Privileged Portal Login / Session State */}
-            {role === 'RELATIONSHIP_MANAGER' ? (
-              <button
-                onClick={() => setIsLoginModalOpen(true)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '9px 18px',
-                  borderRadius: '6px',
-                  fontSize: '13.5px',
-                  fontWeight: 600,
-                  border: '1px solid #38BDF8',
-                  backgroundColor: 'rgba(56, 189, 248, 0.14)',
-                  color: '#38BDF8',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                }}
-              >
-                <Lock size={15} />
-                <span>Steward &amp; Admin Portal</span>
-              </button>
-            ) : (
+            {/* Session User Profile & Sign Out */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              background: 'rgba(255, 255, 255, 0.08)',
+              padding: '6px 12px',
+              borderRadius: '8px',
+              border: '1px solid rgba(255, 255, 255, 0.16)',
+            }}>
               <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                background: 'rgba(0, 0, 0, 0.35)',
-                padding: '5px 8px 5px 14px',
-                borderRadius: '8px',
-                border: '1px solid rgba(56, 189, 248, 0.35)',
+                width: '28px', height: '28px', borderRadius: '50%',
+                background: role === 'ADMIN' ? '#7C3AED' : role === 'DATA_STEWARD' ? '#0EA5E9' : '#2563EB',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: '#ffffff', fontSize: '11px', fontWeight: 700,
               }}>
-                <span className="mono" style={{
-                  fontSize: '12px',
-                  fontWeight: 700,
-                  color: '#38BDF8',
-                  letterSpacing: '0.04em',
-                }}>
-                  ● {role === 'ADMIN' ? 'ADMINISTRATOR' : 'DATA STEWARD'}
+                {role === 'ADMIN' ? 'AD' : role === 'DATA_STEWARD' ? 'DS' : 'RM'}
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <span style={{ fontSize: '12px', fontWeight: 700, color: '#ffffff', lineHeight: 1.1 }}>
+                  {currentUser?.username?.split('@')[0] || 'User Session'}
                 </span>
+                <span className="mono" style={{ fontSize: '10px', color: '#38BDF8', fontWeight: 700, marginTop: 2 }}>
+                  {role.replace('_', ' ')}
+                </span>
+              </div>
+
+              {role === 'RELATIONSHIP_MANAGER' && (
                 <button
-                  onClick={handleLogout}
-                  title="Exit privileged session"
+                  onClick={() => setIsLoginModalOpen(true)}
+                  title="Elevate role scope"
                   style={{
-                    background: 'rgba(239, 68, 68, 0.25)',
-                    border: '1px solid rgba(239, 68, 68, 0.35)',
-                    color: '#FCA5A5',
+                    background: 'rgba(56, 189, 248, 0.15)',
+                    border: '1px solid rgba(56, 189, 248, 0.3)',
+                    color: '#38BDF8',
                     borderRadius: '6px',
-                    padding: '6px 10px',
-                    fontSize: '12px',
+                    padding: '4px 8px',
+                    fontSize: '11px',
                     fontWeight: 600,
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '5px'
+                    gap: '4px',
+                    marginLeft: '4px',
                   }}
                 >
-                  <LogOut size={13} /> Exit
+                  <Lock size={12} /> Switch Scope
                 </button>
-              </div>
-            )}
+              )}
+
+              <button
+                onClick={handleFullLogout}
+                title="Sign out of portal"
+                style={{
+                  background: 'rgba(239, 68, 68, 0.2)',
+                  border: '1px solid rgba(239, 68, 68, 0.35)',
+                  color: '#FCA5A5',
+                  borderRadius: '6px',
+                  padding: '5px 9px',
+                  fontSize: '11.5px',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  marginLeft: '4px',
+                }}
+              >
+                <LogOut size={13} /> Sign Out
+              </button>
+            </div>
           </div>
         </div>
       </header>
