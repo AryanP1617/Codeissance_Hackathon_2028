@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f8fafc;
+  color: #1e293b;
+  font-family: var(--font-ui, 'Inter', sans-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  max-width: 100% !important;
+  margin: 0 !important;
+  text-align: left !important;
+}
