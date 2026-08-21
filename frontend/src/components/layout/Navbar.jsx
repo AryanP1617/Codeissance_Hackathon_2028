@@ -174,29 +174,6 @@ export function Navbar({
               </span>
             </div>
 
-            {role === 'RM' && (
-              <button
-                onClick={onOpenLogin}
-                title="Elevate role scope"
-                style={{
-                  background: 'rgba(56, 189, 248, 0.15)',
-                  border: '1px solid rgba(56, 189, 248, 0.3)',
-                  color: '#38BDF8',
-                  borderRadius: '6px',
-                  padding: '4px 8px',
-                  fontSize: '11px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                  marginLeft: '4px',
-                }}
-              >
-                <Lock size={12} /> Switch Scope
-              </button>
-            )}
-
             <button
               onClick={onLogout}
               title="Sign out of portal"

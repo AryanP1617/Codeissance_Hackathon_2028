@@ -3,6 +3,7 @@ import { CustomerSidebar } from '../components/customer360/CustomerSidebar.jsx';
 import { ProfileHeaderCard } from '../components/customer360/ProfileHeaderCard.jsx';
 import { ConnectedAccounts } from '../components/customer360/ConnectedAccounts.jsx';
 import { MatchCriteriaGrid } from '../components/customer360/MatchCriteriaGrid.jsx';
+import { AiCard } from '../components/customer360/AiCard.jsx';
 import axiosClient from '../utils/api.js';
 import { CheckCircle2, AlertTriangle, X, UserX } from 'lucide-react';
 
@@ -53,18 +54,70 @@ function formatCustomer(c) {
       { field: 'Email', type: 'Probabilistic', score: c.personalProfile?.primaryEmail ? 85 : 0, passed: !!c.personalProfile?.primaryEmail, weight: 15 },
       { field: 'Name', type: 'Fuzzy', score: 95, passed: true, weight: 10 },
     ],
-    sourceRecords: (c.linkedSourceRecords || []).map((r) => {
-      const srcRef = r.sourceRecordRef || {};
-      const raw = srcRef.rawAttributes || {};
-      return {
-        sourceSystem: r.sourceSystem,
-        sourceId: r.sourceCustomerId,
-        name: raw.fullName || c.personalProfile?.fullName || c.fullName,
-        email: raw.email || c.personalProfile?.primaryEmail || c.email,
-        mobile: raw.mobile || c.personalProfile?.primaryPhone || c.mobile,
-        value: getSourceValue(r.sourceSystem, srcRef),
-      };
-    }).concat(c.sourceRecords || []),
+    sourceRecords: (() => {
+      let mapped = (c.linkedSourceRecords || []).map((r) => {
+        const srcRef = r.sourceRecordRef || {};
+        const raw = srcRef.rawAttributes || {};
+        return {
+          sourceSystem: r.sourceSystem,
+          sourceId: r.sourceCustomerId,
+          name: raw.fullName || c.personalProfile?.fullName || c.fullName,
+          email: raw.email || c.personalProfile?.primaryEmail || c.email,
+          mobile: raw.mobile || c.personalProfile?.primaryPhone || c.mobile,
+          value: getSourceValue(r.sourceSystem, srcRef),
+        };
+      }).concat(c.sourceRecords || []);
+
+      if (mapped.length === 0) {
+        const name = c.personalProfile?.fullName || c.fullName || 'Account Holder';
+        const email = c.personalProfile?.primaryEmail || c.email || '';
+        const mobile = c.personalProfile?.primaryPhone || c.mobile || '';
+        const goldenId = c.goldenCustomerId || c._id || '01';
+
+        if (breakdown.equity || (c.equity?.accounts || []).length > 0) {
+          mapped.push({
+            sourceSystem: 'EQUITY',
+            sourceId: c.equity?.accounts?.[0]?.accountId || `EQ_${goldenId}`,
+            name, email, mobile,
+            value: breakdown.equity || c.equity?.accounts?.reduce((acc, a) => acc + (a.currentValue || a.portfolioValue || 0), 0) || 0,
+          });
+        }
+        if (breakdown.mutualFunds || (c.mutualFunds?.investments || []).length > 0) {
+          mapped.push({
+            sourceSystem: 'MUTUAL_FUNDS',
+            sourceId: c.mutualFunds?.investments?.[0]?.folioNumber || `MF_${goldenId}`,
+            name, email, mobile,
+            value: breakdown.mutualFunds || c.mutualFunds?.investments?.reduce((acc, i) => acc + (i.currentValue || i.totalNavValue || 0), 0) || 0,
+          });
+        }
+        if (breakdown.insurance || (c.insurance?.policies || []).length > 0) {
+          mapped.push({
+            sourceSystem: 'INSURANCE',
+            sourceId: c.insurance?.policies?.[0]?.policyNumber || `INS_${goldenId}`,
+            name, email, mobile,
+            value: breakdown.insurance || c.insurance?.policies?.reduce((acc, p) => acc + (p.sumAssured || p.policyValue || 0), 0) || 0,
+          });
+        }
+        if (breakdown.loans || (c.loans?.accounts || []).length > 0) {
+          mapped.push({
+            sourceSystem: 'LOANS',
+            sourceId: c.loans?.accounts?.[0]?.loanAccountId || `LN_${goldenId}`,
+            name, email, mobile,
+            value: breakdown.loans || c.loans?.accounts?.reduce((acc, l) => acc + (l.outstandingBalance || l.sanctionedAmount || 0), 0) || 0,
+          });
+        }
+        if (breakdown.wealth || (c.wealth?.portfolios || []).length > 0) {
+          mapped.push({
+            sourceSystem: 'WEALTH',
+            sourceId: c.wealth?.portfolios?.[0]?.portfolioId || `WL_${goldenId}`,
+            name, email, mobile,
+            value: breakdown.wealth || c.wealth?.portfolios?.reduce((acc, w) => acc + (w.aum || w.netAssetValue || 0), 0) || 0,
+          });
+        }
+      }
+
+      return mapped;
+    })(),
   };
 }
 
@@ -102,20 +155,51 @@ export function Customer360Page({ showMasked = false }) {
     return () => { isMounted = false; };
   }, []);
 
-  // 2. Fetch Selected Customer 360 Dossier
+  // 2. Fetch Selected Customer 360 Dossier & Dynamic PII Unmasking on Toggle
   useEffect(() => {
     if (!selectedCustomerId) return;
 
-    axiosClient.get(`/customers/get-customers/${selectedCustomerId}`)
-      .then((res) => {
-        if (res.data?.data) {
-          setDetailedCustomer(formatCustomer(res.data.data));
-        }
-      })
-      .catch((err) => {
-        console.warn('Could not fetch 360 profile:', err.message);
-      });
-  }, [selectedCustomerId]);
+    if (showMasked) {
+      // Fetch unmasked PII data from /api/v1/customers/get-customers/:id/unmask
+      axiosClient
+        .post(`/customers/get-customers/${selectedCustomerId}/unmask`, {
+          reason: 'RM Dossier PII Inspection',
+        })
+        .then((res) => {
+          const unmasked = res.data?.data;
+          if (unmasked) {
+            const pan = unmasked.primaryIdentifiers?.pan;
+            const mobile = unmasked.personalProfile?.primaryPhone;
+            const email = unmasked.personalProfile?.primaryEmail;
+
+            setDetailedCustomer((prev) => {
+              if (!prev) return prev;
+              return {
+                ...prev,
+                pan: pan || prev.pan,
+                mobile: mobile || prev.mobile,
+                email: email || prev.email,
+              };
+            });
+          }
+        })
+        .catch((err) => {
+          console.warn('Could not fetch unmasked customer PII:', err.message);
+        });
+    } else {
+      // Fetch standard 360 profile
+      axiosClient
+        .get(`/customers/get-customers/${selectedCustomerId}`)
+        .then((res) => {
+          if (res.data?.data) {
+            setDetailedCustomer(formatCustomer(res.data.data));
+          }
+        })
+        .catch((err) => {
+          console.warn('Could not fetch 360 profile:', err.message);
+        });
+    }
+  }, [selectedCustomerId, showMasked]);
 
   if (loading) {
     return (
@@ -161,6 +245,11 @@ export function Customer360Page({ showMasked = false }) {
         <ProfileHeaderCard
           selectedCustomer={activeCustomer}
           showMasked={showMasked}
+        />
+
+        <AiCard
+          goldenCustomerId={activeCustomer?.goldenId}
+          customer={activeCustomer}
         />
 
         <ConnectedAccounts

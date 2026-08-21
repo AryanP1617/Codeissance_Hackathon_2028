@@ -1,45 +1,47 @@
 /**
  * maskData
- * Reconstructed from call sites in the uploaded App.jsx (this file was
- * referenced but not included in the upload). Masks PII for display when
- * `showFull` is false; returns the raw value unchanged when true.
- *
- * Formats assumed from the product screenshots:
- *   PAN:    ABCPS1234F  ->  ABXXXXXX4F   (first 2 + last 2 visible)
- *   MOBILE: +91-98765-43210  ->  +91-XXXXX-3210  (country code + last 4 visible)
- *   EMAIL:  aditya.sharma@example.com  ->  ad***@example.com
+ * Masks sensitive PII for display when `showFull` is false; returns raw value unchanged when true.
+ * Prevents mutating or stripping strings that are already masked by the backend.
  */
 export function maskData(value, type, showFull) {
   if (showFull || !value) return value;
 
+  const str = String(value);
+
+  // If already masked by the backend (contains 'X' or '*'), return as-is to prevent corrupting masks
+  if (str.includes('X') || str.includes('*')) {
+    return str;
+  }
+
   switch (type) {
     case 'PAN': {
-      if (value.length < 4) return value;
-      return value.slice(0, 2) + 'X'.repeat(value.length - 4) + value.slice(-2);
+      if (str.length < 4) return str;
+      return str.slice(0, 2) + 'X'.repeat(Math.max(0, str.length - 4)) + str.slice(-2);
     }
 
     case 'MOBILE': {
-      const parts = value.split('-');
+      const parts = str.split('-');
       if (parts.length < 2) {
-        const digits = value.replace(/\D/g, '');
+        const digits = str.replace(/\D/g, '');
+        if (digits.length <= 4) return str;
         return 'X'.repeat(Math.max(0, digits.length - 4)) + digits.slice(-4);
       }
       return parts
         .map((part, i) => {
-          if (i === 0) return part; // country code stays visible
-          if (i === parts.length - 1) return part.slice(-4); // last block: show last 4 only
+          if (i === 0) return part;
+          if (i === parts.length - 1) return part.slice(-4);
           return 'X'.repeat(part.length);
         })
         .join('-');
     }
 
     case 'EMAIL': {
-      const [local, domain] = value.split('@');
-      if (!domain) return value;
+      const [local, domain] = str.split('@');
+      if (!domain) return str;
       return `${local.slice(0, 2)}***@${domain}`;
     }
 
     default:
-      return value;
+      return str;
   }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router';
+import axiosClient from './utils/api.js';
 
 import { Navbar } from './components/layout/Navbar.jsx';
 import { TabNavigation } from './components/layout/TabNavigation.jsx';
@@ -14,7 +15,7 @@ import { OpportunitiesPage } from './pages/OpportunitiesPage.jsx';
 import { SiloSimulatorPage } from './pages/SiloSimulatorPage.jsx';
 import { MatchSettingsPage } from './pages/MatchSettingsPage.jsx';
 
-import { Users, AlertCircle, Sparkles, SlidersHorizontal, Cpu } from 'lucide-react';
+import { Users, AlertCircle, Cpu } from 'lucide-react';
 import './styles/theme.css';
 
 // Protected Route Wrapper
@@ -59,7 +60,14 @@ function MainAppShell() {
     navigate('/360');
   };
 
-  const handleFullLogout = () => {
+  const handleFullLogout = async () => {
+    try {
+      await axiosClient.post('/users/logout');
+    } catch (err) {
+      // Ignore API errors during sign out
+    }
+    localStorage.removeItem('accessToken');
+    sessionStorage.clear();
     setIsAuthenticated(false);
     setCurrentUser(null);
     setRole('RM');
@@ -74,18 +82,15 @@ function MainAppShell() {
   };
 
   const canAccessTab = (tabId) => {
-    if (role === 'ADMIN' || role === 'JUDGE') return true;
-    if (role === 'DATA_STEWARD') return tabId !== 'RULES';
-    if (role === 'RM') return tabId === '360' || tabId === 'OPPORTUNITIES';
-    return false;
+    if (role === 'ADMIN' || role === 'JUDGE' || role === 'DATA_STEWARD') return true;
+    if (role === 'RM') return tabId === '360' || tabId === 'SIMULATOR' || tabId === 'REVIEW';
+    return true;
   };
 
   const tabs = [
     { id: '360', label: 'Customer Overview', icon: Users, path: '/360', count: null },
     { id: 'REVIEW', label: 'Needs Review', icon: AlertCircle, path: '/review', count: null, tone: 'warning' },
-    { id: 'OPPORTUNITIES', label: 'Top Recommendations', icon: Sparkles, path: '/opportunities', count: null, tone: 'gold' },
     { id: 'SIMULATOR', label: 'Silo Simulator', icon: Cpu, path: '/simulator', count: null },
-    { id: 'RULES', label: 'Match Settings', icon: SlidersHorizontal, path: '/rules', count: null },
   ];
 
   return (
