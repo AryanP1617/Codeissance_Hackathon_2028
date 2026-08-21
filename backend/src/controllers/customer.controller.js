@@ -333,9 +333,164 @@ const unmaskCustomerPII = asyncHandler(async (req, res) => {
   );
 });
 
+// Helper to sum amounts from array of holdings
+const sumHoldings = (items = [], key1 = "currentValue", key2 = "investedValue") => {
+  if (!Array.isArray(items)) return 0;
+  return items.reduce((acc, item) => acc + Number(item?.[key1] ?? item?.[key2] ?? item?.amount ?? item?.sumAssured ?? item?.outstandingBalance ?? 0), 0);
+};
+
+/**
+ * getCustomerLineageGraph
+ * Operational Role: Computes and returns the identity lineage graph structure
+ * aligned with the frontend <LineageGraph> component schema.
+ */
+const getCustomerLineageGraph = asyncHandler(async (req, res) => {
+  const { id, goldenCustomerId: paramGoldenCustomerId } = req.params;
+  const targetId = paramGoldenCustomerId || id || req.query.goldenCustomerId;
+
+  if (!targetId) {
+    throw new ApiError(400, "Golden Customer ID parameter is required");
+  }
+
+  // 1. Horizontal RBAC Validation for RM role
+  if (req.user?.role === "RM") {
+    const assignedIds = req.user.assignedGoldenCustomerIds || [];
+    if (!assignedIds.includes(targetId)) {
+      throw new ApiError(
+        403,
+        "Access denied. You do not have permission to view this customer profile."
+      );
+    }
+  }
+
+  // 2. Lookup Golden Customer Profile & Populate Linked Source Records
+  const isObjectId = mongoose.Types.ObjectId.isValid(targetId);
+  const goldenRecord = await GoldenCustomer.findOne({
+    $or: [
+      { goldenCustomerId: targetId },
+      ...(isObjectId ? [{ _id: targetId }] : [])
+    ]
+  }).populate({
+    path: "linkedSourceRecords.sourceRecordRef",
+    model: "SourceCustomer"
+  });
+
+  if (!goldenRecord) {
+    throw new ApiError(404, "Golden customer profile not found");
+  }
+
+  if (
+    req.user?.role === "RM" &&
+    !req.user.assignedGoldenCustomerIds?.includes(goldenRecord.goldenCustomerId)
+  ) {
+    throw new ApiError(
+      403,
+      "Access denied. You do not have permission to view this customer profile."
+    );
+  }
+
+  const linkedRecords = goldenRecord.linkedSourceRecords || [];
+
+  // 3. Compute Average Match Confidence Percentage across Linked Records
+  let matchConfidence = 100;
+  if (linkedRecords.length > 0) {
+    const totalConfidenceScore = linkedRecords.reduce((sum, item) => {
+      let score = Number(item.confidenceScore) || 0;
+      if (score > 0 && score <= 1) {
+        score = score * 100;
+      }
+      return sum + score;
+    }, 0);
+    matchConfidence = Math.round(totalConfidenceScore / linkedRecords.length);
+  }
+
+  const breakdown = goldenRecord.totalRelationshipValue?.breakdown || {};
+
+  const nodes = [
+    {
+      id: goldenRecord.goldenCustomerId,
+      type: "GOLDEN_RECORD",
+      label: goldenRecord.personalProfile?.fullName || "Golden Master Record",
+      goldenCustomerId: goldenRecord.goldenCustomerId,
+      matchConfidence: goldenRecord.matchStatus === "AUTO_MERGED" ? 100 : 88,
+      totalRelationshipValue: goldenRecord.totalRelationshipValue?.totalValue || 0,
+      breakdown,
+    },
+    ...linkedRecords.map((link) => {
+      const srcRef = link.sourceRecordRef || {};
+      const dHoldings = srcRef.domainHoldings || {};
+      const hData = srcRef.holdingsData || {};
+      const sys = link.sourceSystem?.toUpperCase();
+
+      // 1. Check TRV Breakdown first
+      let assetValue = 0;
+      if (sys === "EQUITY" && breakdown.equity) assetValue = breakdown.equity;
+      else if (sys === "MUTUAL_FUNDS" && breakdown.mutualFunds) assetValue = breakdown.mutualFunds;
+      else if (sys === "INSURANCE" && breakdown.insurance) assetValue = breakdown.insurance;
+      else if (sys === "LOANS" && breakdown.loans) assetValue = breakdown.loans;
+      else if (sys === "WEALTH" && breakdown.wealth) assetValue = breakdown.wealth;
+
+      // 2. If TRV breakdown for this silo is missing/0, compute directly from source record arrays
+      if (!assetValue) {
+        if (sys === "EQUITY") {
+          assetValue = sumHoldings(dHoldings.equityHoldings, "currentValue", "investedValue") || hData.portfolioValue || 0;
+        } else if (sys === "MUTUAL_FUNDS") {
+          assetValue = sumHoldings(dHoldings.mfHoldings, "currentValue", "investedValue") || hData.totalNavValue || 0;
+        } else if (sys === "INSURANCE") {
+          assetValue = sumHoldings(dHoldings.insurancePolicies, "sumAssured", "premiumAmount") || sumHoldings(goldenRecord.insurance?.policies, "amount") || hData.sumAssured || 0;
+        } else if (sys === "LOANS") {
+          assetValue = sumHoldings(dHoldings.loans, "outstandingBalance", "principalAmount") || hData.outstandingAmount || 0;
+        } else if (sys === "WEALTH") {
+          assetValue = sumHoldings(dHoldings.wealthHoldings, "currentValue", "investedAmount") || hData.aum || 0;
+        }
+      }
+
+      return {
+        id: `${link.sourceSystem}-${link.sourceCustomerId}`,
+        type: "SOURCE_RECORD",
+        sourceSystem: link.sourceSystem,
+        sourceCustomerId: link.sourceCustomerId,
+        accountHolderName: srcRef.rawAttributes?.fullName || goldenRecord.personalProfile?.fullName || "Account Holder",
+        email: srcRef.rawAttributes?.email || "",
+        mobile: srcRef.rawAttributes?.mobile || "",
+        assetValue: Number(assetValue) || 0,
+        confidenceScore: Math.round((link.confidenceScore || 1) * 100),
+        matchType: link.matchType || "DETERMINISTIC",
+      };
+    }),
+  ];
+
+  const sourceRecords = nodes
+    .filter((n) => n.type === "SOURCE_RECORD")
+    .map((n) => ({
+      sourceId: n.sourceCustomerId,
+      sourceSystem: n.sourceSystem,
+      name: n.accountHolderName,
+      email: n.email,
+      mobile: n.mobile,
+      value: n.assetValue,
+    }));
+
+  const lineageGraph = {
+    goldenId: goldenRecord.goldenCustomerId,
+    fullName: goldenRecord.personalProfile?.fullName || "Golden Record",
+    totalRelationshipValue: goldenRecord.totalRelationshipValue?.totalValue || 0,
+    matchConfidence,
+    breakdown,
+    nodes,
+    sourceRecords,
+  };
+
+  return res.status(200).json(
+    new ApiResponse(200, lineageGraph, "Customer lineage graph fetched successfully")
+  );
+});
+
 export {
   getCustomers,
   getCustomer360ById,
-  unmaskCustomerPII
+  unmaskCustomerPII,
+  getCustomerLineageGraph
 };
+
 

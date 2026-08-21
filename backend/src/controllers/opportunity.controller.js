@@ -10,7 +10,7 @@ import {
   evaluateAllGoldenCustomers
 } from "../services/nbo.service.js";
 import { logAuditEvent } from "../services/audit.service.js";
-import { generateCrossSellLead } from "../services/aiInsight.service.js";
+import { generateCrossSellLead } from "../services/aI.service.js";
 
 
 /**

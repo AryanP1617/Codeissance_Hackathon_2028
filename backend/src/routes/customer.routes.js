@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { getCustomers, getCustomer360ById, unmaskCustomerPII } from "../controllers/customer.controller.js";
+import {
+  getCustomers,
+  getCustomer360ById,
+  unmaskCustomerPII,
+  getCustomerLineageGraph
+} from "../controllers/customer.controller.js";
 import { verifyJwt } from "../middlewares/auth.middleware.js";
 
 const customer_router = Router();
@@ -16,8 +21,13 @@ customer_router.route("/unmask-pii").post(unmaskCustomerPII);
 // GET/POST /api/v1/customers/get-customers/:id/unmask - Audited PII unmasking by ID
 customer_router.route("/get-customers/:id/unmask").post(unmaskCustomerPII).get(unmaskCustomerPII);
 
+// GET /api/v1/customers/get-lineage-graph/:id & /api/v1/customers/get-customers/:id/lineage-graph
+customer_router.route("/get-lineage-graph/:id").get(getCustomerLineageGraph);
+customer_router.route("/get-customers/:id/lineage-graph").get(getCustomerLineageGraph);
+
 // GET /api/v1/customers/:id - Retrieve complete 360 customer profile by Golden Customer ID
 customer_router.route("/get-customers/:id").get(getCustomer360ById);
 
 export { customer_router };
 export default customer_router;
+
