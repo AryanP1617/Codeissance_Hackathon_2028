@@ -1,74 +1,52 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import {
-  Target, Shield, KeyRound, Lock, Eye, EyeOff, ArrowRight,
-  Sun, Moon, Users, CheckCircle2, ShieldCheck, Sparkles, Cpu, Layers
+  Target, Eye, EyeOff, ArrowRight, Sun, Moon,
+  ShieldCheck, Sparkles, Cpu, Layers, AlertCircle
 } from 'lucide-react';
-import { Button, Chip } from './ui.jsx';
+import { Button } from '../components/common/ui.jsx';
+import axiosClient from '../utils/api.js';
 
 export function LoginPage({ onLogin, theme, toggleTheme }) {
-  const [selectedRole, setSelectedRole] = useState('DATA_STEWARD');
-  const [username, setUsername] = useState('steward.alex@wealthbank.com');
-  const [password, setPassword] = useState('••••••••••••');
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
 
-  const roleConfigs = {
-    RELATIONSHIP_MANAGER: {
-      title: 'Relationship Manager',
-      icon: Users,
-      badge: 'Client Facing',
-      description: 'Access Customer 360 dossiers, total relationship values, and AI Next-Best-Opportunity pitches.',
-      defaultUsername: 'rm.sarah@wealthbank.com',
-      gradient: 'linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)',
-    },
-    DATA_STEWARD: {
-      title: 'Data Steward',
-      icon: Shield,
-      badge: 'Identity Governance',
-      description: 'Resolve duplicate identity queues, reconcile conflicting records, and run silo simulations.',
-      defaultUsername: 'steward.alex@wealthbank.com',
-      gradient: 'linear-gradient(135deg, #0EA5E9 0%, #0369A1 100%)',
-    },
-    ADMIN: {
-      title: 'Administrator',
-      icon: KeyRound,
-      badge: 'Full Operations',
-      description: 'Configure matching algorithm weights, confidence boundaries, and re-execute resolution engines.',
-      defaultUsername: 'admin.lead@wealthbank.com',
-      gradient: 'linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%)',
-    },
-  };
-
-  const handleRoleSelect = (roleKey) => {
-    setSelectedRole(roleKey);
-    setUsername(roleConfigs[roleKey].defaultUsername);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      onLogin({
-        role: selectedRole,
-        username: username || roleConfigs[selectedRole].defaultUsername,
-      });
-      setIsSubmitting(false);
-    }, 300);
-  };
+    setError(null);
 
-  const handleQuickPreset = (roleKey) => {
-    setIsSubmitting(true);
-    setTimeout(() => {
-      onLogin({
-        role: roleKey,
-        username: roleConfigs[roleKey].defaultUsername,
-      });
-      setIsSubmitting(false);
-    }, 200);
-  };
+    try {
+      const response = await axiosClient.post('/users/login', { email, password });
+      const payload = response.data?.data || response.data || response;
+      const userObj = payload.user || payload;
 
-  const activeConfig = roleConfigs[selectedRole];
+      if (payload.accessToken) {
+        localStorage.setItem('accessToken', payload.accessToken);
+      }
+
+      onLogin({
+        email: userObj.email || email,
+        role: userObj.role || 'RM',
+        ...userObj,
+      });
+
+      navigate('/360');
+    } catch (err) {
+      setError(
+        err.response?.data?.message ||
+        err.message ||
+        'Authentication failed. Please check your credentials.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div style={{
@@ -266,78 +244,39 @@ export function LoginPage({ onLogin, theme, toggleTheme }) {
                   Sign in to your Portal
                 </h3>
                 <p style={{ fontSize: '13.5px', color: theme === 'dark' ? '#94A3B8' : '#64748B', margin: 0 }}>
-                  Select your authorization scope and enter credentials.
+                  Enter your enterprise user credentials to access the console.
                 </p>
               </div>
 
-              {/* Role Scope Selection Cards */}
-              <div style={{ marginBottom: 22 }}>
-                <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: theme === 'dark' ? '#CBD5E1' : '#475569', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: 10 }}>
-                  Select Persona Scope
-                </label>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  {Object.entries(roleConfigs).map(([roleKey, cfg]) => {
-                    const IconComp = cfg.icon;
-                    const isSelected = selectedRole === roleKey;
-                    return (
-                      <button
-                        key={roleKey}
-                        type="button"
-                        onClick={() => handleRoleSelect(roleKey)}
-                        style={{
-                          padding: '12px 14px',
-                          borderRadius: '10px',
-                          border: isSelected
-                            ? '2px solid #2563EB'
-                            : theme === 'dark' ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid #E2E8F0',
-                          backgroundColor: isSelected
-                            ? (theme === 'dark' ? 'rgba(37, 99, 235, 0.15)' : 'rgba(37, 99, 235, 0.06)')
-                            : (theme === 'dark' ? 'rgba(30, 41, 59, 0.5)' : '#F8FAFC'),
-                          cursor: 'pointer',
-                          textAlign: 'left',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 12,
-                          transition: 'all 0.15s ease',
-                        }}
-                      >
-                        <div style={{
-                          width: 36, height: 36, borderRadius: 8,
-                          background: cfg.gradient,
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          color: '#ffffff', flexShrink: 0
-                        }}>
-                          <IconComp size={18} />
-                        </div>
-                        <div style={{ flex: 1 }}>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span style={{ fontSize: '14px', fontWeight: 700, color: theme === 'dark' ? '#F8FAFC' : '#0F172A' }}>
-                              {cfg.title}
-                            </span>
-                            <span className="mono" style={{ fontSize: '11px', fontWeight: 700, color: isSelected ? '#2563EB' : (theme === 'dark' ? '#94A3B8' : '#64748B') }}>
-                              {cfg.badge}
-                            </span>
-                          </div>
-                          <p style={{ fontSize: '12px', color: theme === 'dark' ? '#94A3B8' : '#64748B', margin: '2px 0 0 0', lineHeight: 1.3 }}>
-                            {cfg.description}
-                          </p>
-                        </div>
-                      </button>
-                    );
-                  })}
+              {error && (
+                <div style={{
+                  padding: '12px 14px',
+                  borderRadius: '8px',
+                  backgroundColor: 'rgba(239, 68, 68, 0.12)',
+                  border: '1px solid rgba(239, 68, 68, 0.3)',
+                  color: '#EF4444',
+                  fontSize: '13px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  marginBottom: '18px',
+                }}>
+                  <AlertCircle size={16} style={{ flexShrink: 0 }} />
+                  <span>{error}</span>
                 </div>
-              </div>
+              )}
 
               {/* Form Controls */}
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: theme === 'dark' ? '#CBD5E1' : '#475569', marginBottom: 6 }}>
-                    Enterprise User ID
+                    Enterprise Email Address
                   </label>
                   <input
                     type="email"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="name@company.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                     style={{
                       width: '100%',
@@ -355,11 +294,12 @@ export function LoginPage({ onLogin, theme, toggleTheme }) {
 
                 <div>
                   <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: theme === 'dark' ? '#CBD5E1' : '#475569', marginBottom: 6 }}>
-                    Security Token / Password
+                    Password
                   </label>
                   <div style={{ position: 'relative' }}>
                     <input
                       type={showPassword ? 'text' : 'password'}
+                      placeholder="Enter password..."
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
@@ -416,63 +356,10 @@ export function LoginPage({ onLogin, theme, toggleTheme }) {
                     marginTop: 4,
                   }}
                 >
-                  {isSubmitting ? 'Authenticating...' : `Enter as ${activeConfig.title}`} <ArrowRight size={16} />
+                  {isSubmitting ? 'Authenticating...' : 'Sign In to Portal'} <ArrowRight size={16} />
                 </Button>
               </form>
             </div>
-
-            {/* Quick Demo Mode Shortcuts */}
-            <div style={{
-              marginTop: '22px',
-              paddingTop: '16px',
-              borderTop: theme === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #E2E8F0',
-            }}>
-              <p className="mono" style={{ fontSize: '11px', fontWeight: 700, color: '#38BDF8', textTransform: 'uppercase', marginBottom: 10, textAlign: 'center', letterSpacing: '0.06em' }}>
-                ⚡ Fast Demo Login Presets
-              </p>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
-                <button
-                  type="button"
-                  onClick={() => handleQuickPreset('RELATIONSHIP_MANAGER')}
-                  style={{
-                    padding: '8px 6px', fontSize: '11.5px', fontWeight: 600,
-                    background: theme === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#F1F5F9',
-                    border: theme === 'dark' ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid #CBD5E1',
-                    borderRadius: '6px', cursor: 'pointer', color: theme === 'dark' ? '#E2E8F0' : '#334155',
-                    textAlign: 'center'
-                  }}
-                >
-                  RM Persona ➔
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleQuickPreset('DATA_STEWARD')}
-                  style={{
-                    padding: '8px 6px', fontSize: '11.5px', fontWeight: 600,
-                    background: theme === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#F1F5F9',
-                    border: theme === 'dark' ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid #CBD5E1',
-                    borderRadius: '6px', cursor: 'pointer', color: theme === 'dark' ? '#E2E8F0' : '#334155',
-                    textAlign: 'center'
-                  }}
-                >
-                  Steward ➔
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleQuickPreset('ADMIN')}
-                  style={{
-                    padding: '8px 6px', fontSize: '11.5px', fontWeight: 600,
-                    background: theme === 'dark' ? 'rgba(255, 255, 255, 0.05)' : '#F1F5F9',
-                    border: theme === 'dark' ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid #CBD5E1',
-                    borderRadius: '6px', cursor: 'pointer', color: theme === 'dark' ? '#E2E8F0' : '#334155',
-                    textAlign: 'center'
-                  }}
-                >
-                  Admin ➔
-                </button>
-              </div>
-            </div>
-
           </div>
 
         </div>

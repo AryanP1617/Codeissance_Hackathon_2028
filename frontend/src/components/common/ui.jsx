@@ -1,9 +1,7 @@
 import React from 'react';
 
 /* -----------------------------------------------------------------------
- * Small, composable UI primitives shared across the console.
- * Kept dependency-free (no class-variance libs) since the surface area
- * here is small enough that plain prop-driven components stay readable.
+ * Shared UI Primitives
  * ---------------------------------------------------------------------*/
 
 export function Chip({ tone = 'neutral', children, icon: Icon }) {
@@ -33,8 +31,6 @@ export function Button({ variant = 'secondary', size = 'md', icon: Icon, block, 
   );
 }
 
-/* Source-system taxonomy: a stable colour + label per account type, so the
- * same category always reads the same way anywhere it appears in the app. */
 export const SOURCE_SYSTEM_META = {
   EQUITY: { label: 'Equity', color: '#234A8F' },
   MUTUAL_FUNDS: { label: 'Mutual Funds', color: '#0B6B41' },
@@ -64,11 +60,6 @@ export function SourceBadge({ system }) {
   );
 }
 
-/* Confidence Match — rendered as a small radial gauge rather than a flat
- * number. This is the one deliberately "designed" moment in an otherwise
- * quiet, data-first interface: every profile-matching decision in this
- * product hinges on this score, so it earns a slightly heavier visual
- * treatment than a plain badge. */
 export function ConfidenceRing({ value, size = 56, label }) {
   const radius = (size - 8) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -116,13 +107,17 @@ export function ConfidenceRing({ value, size = 56, label }) {
   );
 }
 
-export function Avatar({ name, size = 40, tone = 'brand' }) {
-  const initials = name
+export function Avatar({ name = 'Customer', size = 40, tone = 'brand' }) {
+  const safeName = String(name || 'Customer');
+  const initials = safeName
+    .trim()
     .split(' ')
+    .filter(Boolean)
     .map((p) => p[0])
     .slice(0, 2)
     .join('')
-    .toUpperCase();
+    .toUpperCase() || 'CU';
+
   const bg = tone === 'brand' ? 'var(--brand-800)' : 'var(--ink-700)';
   return (
     <div

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Lock, KeyRound, Shield } from 'lucide-react';
-import { Button } from './ui.jsx';
+import { Button } from '../ui.jsx';
 
 export function LoginModal({ isOpen, onClose, onLoginSuccess }) {
   const [selectedRole, setSelectedRole] = useState('DATA_STEWARD');

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { X, ShieldAlert, FileText, Filter, Search, ShieldCheck } from 'lucide-react';
-import { MonoTag, Chip, Button } from './ui.jsx';
+import { X, ShieldAlert, FileText, Filter, Search } from 'lucide-react';
+import { MonoTag, Chip, Button } from '../ui.jsx';
 
 const ACTION_TONE_MAP = {
   PII_UNMASK: 'warning',

@@ -3,7 +3,7 @@ import { HighlightedDiff } from '../utils/diffHelper';
 import {
   Check, X, AlertTriangle, CheckCircle2, ChevronDown, ChevronUp, Layers
 } from 'lucide-react';
-import { Button, SourceBadge, MonoTag, ConfidenceRing } from './ui.jsx';
+import { Button, SourceBadge, MonoTag, ConfidenceRing } from './common/ui.jsx';
 
 const inr = (n) => `₹${n.toLocaleString('en-IN')}`;
 
