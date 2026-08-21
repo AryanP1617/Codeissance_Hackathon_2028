@@ -86,7 +86,7 @@ Return valid JSON matching the schema:
 `;
 
         const response = await ai.models.generateContent({
-            model: "gemini-3.6-flash",
+            model: "gemini-3.5-flash",
             contents: prompt,
             config: {
                 responseMimeType: "application/json",
@@ -113,4 +113,53 @@ Return valid JSON matching the schema:
         console.error("Cross-sell intelligence generation failed:", error.message);
         throw error;
     }
+};
+
+export const generateClientPitchEmail = async (goldenCustomer, opportunity) => {
+    const customerName = goldenCustomer.personalProfile?.fullName || "Valued Client";
+    const schemeName = opportunity.targetProduct;
+    const reason = opportunity.triggerReason || opportunity.explainabilityLog?.gapIdentified || "Portfolio growth and diversification";
+
+    const prompt = `
+You are a premier Wealth Relationship Manager.
+Write an executive-level email pitch proposing a specific financial scheme to our client.
+
+Target Scheme / Offer: "${schemeName}"
+Identified Need / Advantage: "${reason}"
+Client Name: "${customerName}"
+
+Email Guidelines:
+- Subject Line: Actionable, executive, mentioning "${schemeName}".
+- Body Structure (in clean HTML paragraphs and lists):
+  1. Professional greeting to ${customerName}.
+  2. Scheme Introduction: 2 sentences clearly introducing what "${schemeName}" is, how it operates, and why it is relevant today.
+  3. Key Advantages: 3 distinct <li> bullet points detailing the specific financial benefits (e.g., risk management, tax efficiency, yield, preferential rates).
+  4. Next Step / Call to Action: A polite closing inviting a brief 5-minute discussion.
+- Exclude internal database IDs, technical metrics, or relationship net worth figures.
+
+Return strictly valid JSON:
+{
+  "subject": "<Subject Line>",
+  "htmlBody": "<HTML formatted message body>"
+}
+`;
+
+    const response = await ai.models.generateContent({
+        model: "gemini-3.5-flash",
+        contents: prompt,
+        config: {
+            responseMimeType: "application/json",
+            responseSchema: {
+                type: "OBJECT",
+                properties: {
+                    subject: { type: "STRING" },
+                    htmlBody: { type: "STRING" }
+                },
+                required: ["subject", "htmlBody"]
+            }
+        }
+    });
+
+    const responseText = typeof response.text === "function" ? response.text() : response.text;
+    return JSON.parse(responseText);
 };
