@@ -109,6 +109,12 @@ const getCustomers = asyncHandler(async (req, res) => {
         personalProfile: 1,
         totalRelationshipValue: 1,
         status: 1,
+        linkedSourceRecords: 1,
+        equity: 1,
+        mutualFunds: 1,
+        insurance: 1,
+        loans: 1,
+        wealth: 1,
         createdAt: 1,
         updatedAt: 1
       }
