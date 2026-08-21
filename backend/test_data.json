@@ -1,0 +1,242 @@
+[
+  {
+    "sourceSystem": "EQUITY",
+    "sourceCustomerId": "EQ_101",
+    "rawAttributes": { "fullName": "Aarav Sharma", "pan": "ABCPS1001A", "mobile": "9820011001", "email": "aarav.sharma@invest.in", "city": "Mumbai" },
+    "holdingsData": { "portfolioValue": 1200000, "activeHoldings": ["TCS", "INFY"] }
+  },
+  {
+    "sourceSystem": "MUTUAL_FUNDS",
+    "sourceCustomerId": "MF_102",
+    "rawAttributes": { "fullName": "Aarav Sharma", "pan": "ABCPS1001A", "mobile": "9820011001", "email": "aarav.sharma@invest.in", "city": "Mumbai" },
+    "holdingsData": { "totalNavValue": 750000, "schemeCount": 4, "sipActive": true }
+  },
+  {
+    "sourceSystem": "EQUITY",
+    "sourceCustomerId": "EQ_103",
+    "rawAttributes": { "fullName": "Pooja Mehta", "pan": "POOJPM1002B", "mobile": "9845012002", "email": "pooja.mehta@techcorp.com", "city": "Bengaluru" },
+    "holdingsData": { "portfolioValue": 850000, "activeHoldings": ["RELIANCE", "HDFCBANK"] }
+  },
+  {
+    "sourceSystem": "INSURANCE",
+    "sourceCustomerId": "IN_104",
+    "rawAttributes": { "fullName": "Pooja Mehta", "pan": "POOJPM1002B", "mobile": "9845012002", "email": "p.mehta@techcorp.com", "city": "Bengaluru" },
+    "holdingsData": { "policyType": "TERM", "sumAssured": 5000000, "status": "ACTIVE" }
+  },
+  {
+    "sourceSystem": "MUTUAL_FUNDS",
+    "sourceCustomerId": "MF_105",
+    "rawAttributes": { "fullName": "Vikram Desai", "pan": "VDESK1003C", "mobile": "9898013003", "email": "vikram.desai@corp.in", "city": "Ahmedabad" },
+    "holdingsData": { "totalNavValue": 2500000, "schemeCount": 6, "sipActive": true }
+  },
+  {
+    "sourceSystem": "LOANS",
+    "sourceCustomerId": "LN_106",
+    "rawAttributes": { "fullName": "Vikram Desai", "pan": "VDESK1003C", "mobile": "9898013003", "email": "vikram.desai@corp.in", "city": "Ahmedabad" },
+    "holdingsData": { "loanType": "HOME", "outstandingAmount": 4500000, "sanctionedAmount": 6000000, "emiAmount": 42000 }
+  },
+  {
+    "sourceSystem": "INSURANCE",
+    "sourceCustomerId": "IN_107",
+    "rawAttributes": { "fullName": "Sneha Iyer", "pan": "SIYEP1004D", "mobile": "9841014004", "email": "sneha.iyer@healthnet.com", "city": "Chennai" },
+    "holdingsData": { "policyType": "HEALTH", "sumAssured": 1500000, "status": "ACTIVE" }
+  },
+  {
+    "sourceSystem": "LOANS",
+    "sourceCustomerId": "LN_108",
+    "rawAttributes": { "fullName": "Sneha Iyer", "pan": "SIYEP1004D", "mobile": "9841014004", "email": "sneha.iyer@healthnet.com", "city": "Chennai" },
+    "holdingsData": { "loanType": "AUTO", "outstandingAmount": 600000, "sanctionedAmount": 900000, "emiAmount": 18000 }
+  },
+  {
+    "sourceSystem": "EQUITY",
+    "sourceCustomerId": "EQ_109",
+    "rawAttributes": { "fullName": "Kabir Das", "pan": "KDASP1005E", "mobile": "9831015005", "email": "kabir.das@tradex.com", "city": "Kolkata" },
+    "holdingsData": { "portfolioValue": 3100000, "activeHoldings": ["ITC", "TATAMOTORS"] }
+  },
+  {
+    "sourceSystem": "MUTUAL_FUNDS",
+    "sourceCustomerId": "MF_110",
+    "rawAttributes": { "fullName": "Kabir K. Das", "pan": "KDASP1005E", "mobile": "9831015005", "email": "kabir.das@gmail.com", "city": "Kolkata" },
+    "holdingsData": { "totalNavValue": 1100000, "schemeCount": 3, "sipActive": false }
+  },
+  {
+    "sourceSystem": "INSURANCE",
+    "sourceCustomerId": "IN_111",
+    "rawAttributes": { "fullName": "Ananya Sen", "pan": "ASENP1006F", "mobile": "9830016006", "email": "ananya.sen@global.org", "city": "Kolkata" },
+    "holdingsData": { "policyType": "TERM", "sumAssured": 7500000, "status": "ACTIVE" }
+  },
+  {
+    "sourceSystem": "EQUITY",
+    "sourceCustomerId": "EQ_112",
+    "rawAttributes": { "fullName": "Ananya Sen", "pan": "ASENP1006F", "mobile": "9830016006", "email": "ananya.sen@global.org", "city": "Kolkata" },
+    "holdingsData": { "portfolioValue": 650000, "activeHoldings": ["WIPRO"] }
+  },
+  {
+    "sourceSystem": "LOANS",
+    "sourceCustomerId": "LN_113",
+    "rawAttributes": { "fullName": "Rohan Joshi", "pan": "RJOSH1007G", "mobile": "9822017007", "email": "rohan.joshi@buildcon.in", "city": "Pune" },
+    "holdingsData": { "loanType": "HOME", "outstandingAmount": 3800000, "sanctionedAmount": 5000000, "emiAmount": 37000 }
+  },
+  {
+    "sourceSystem": "MUTUAL_FUNDS",
+    "sourceCustomerId": "MF_114",
+    "rawAttributes": { "fullName": "Rohan Joshi", "pan": "RJOSH1007G", "mobile": "9822017007", "email": "rohan.joshi@buildcon.in", "city": "Pune" },
+    "holdingsData": { "totalNavValue": 920000, "schemeCount": 2, "sipActive": true }
+  },
+  {
+    "sourceSystem": "EQUITY",
+    "sourceCustomerId": "EQ_115",
+    "rawAttributes": { "fullName": "Meera Nambiar", "pan": "MNAMB1008H", "mobile": "9847018008", "email": "meera.n@kerala.ac.in", "city": "Kochi" },
+    "holdingsData": { "portfolioValue": 1450000, "activeHoldings": ["HCLTECH", "SBIN"] }
+  },
+  {
+    "sourceSystem": "INSURANCE",
+    "sourceCustomerId": "IN_116",
+    "rawAttributes": { "fullName": "Meera Nambiar", "pan": "MNAMB1008H", "mobile": "9847018008", "email": "meera.n@kerala.ac.in", "city": "Kochi" },
+    "holdingsData": { "policyType": "LIFE", "sumAssured": 3000000, "status": "ACTIVE" }
+  },
+  {
+    "sourceSystem": "LOANS",
+    "sourceCustomerId": "LN_117",
+    "rawAttributes": { "fullName": "Aditi Rao", "pan": "ARAOP1009J", "mobile": "9849019009", "email": "aditi.rao@hydtech.com", "city": "Hyderabad" },
+    "holdingsData": { "loanType": "PERSONAL", "outstandingAmount": 450000, "sanctionedAmount": 500000, "emiAmount": 14000 }
+  },
+  {
+    "sourceSystem": "MUTUAL_FUNDS",
+    "sourceCustomerId": "MF_118",
+    "rawAttributes": { "fullName": "Aditi Rao", "pan": "ARAOP1009J", "mobile": "9849019009", "email": "aditi.rao@hydtech.com", "city": "Hyderabad" },
+    "holdingsData": { "totalNavValue": 1600000, "schemeCount": 5, "sipActive": true }
+  },
+  {
+    "sourceSystem": "EQUITY",
+    "sourceCustomerId": "EQ_119",
+    "rawAttributes": { "fullName": "Deepak Choudhury", "pan": "DCHOU1010K", "mobile": "9810020010", "email": "deepak.c@finadvisors.in", "city": "Delhi NCR" },
+    "holdingsData": { "portfolioValue": 2200000, "activeHoldings": ["BAJFINANCE", "ASIANPAINT"] }
+  },
+  {
+    "sourceSystem": "INSURANCE",
+    "sourceCustomerId": "IN_120",
+    "rawAttributes": { "fullName": "Deepak Choudhury", "pan": "DCHOU1010K", "mobile": "9810020010", "email": "deepak.c@finadvisors.in", "city": "Delhi NCR" },
+    "holdingsData": { "policyType": "TERM", "sumAssured": 10000000, "status": "ACTIVE" }
+  },
+  {
+    "sourceSystem": "EQUITY",
+    "sourceCustomerId": "EQ_201",
+    "rawAttributes": { "fullName": "Rohan Verma", "pan": "NOT_PROVIDED", "mobile": "9811122233", "email": "verma.fam@gmail.com", "city": "Delhi NCR" },
+    "holdingsData": { "portfolioValue": 350000, "activeHoldings": ["TATAPOWER"] }
+  },
+  {
+    "sourceSystem": "LOANS",
+    "sourceCustomerId": "LN_202",
+    "rawAttributes": { "fullName": "Rahul Verma", "pan": "NOT_PROVIDED", "mobile": "9811122233", "email": "verma.fam@gmail.com", "city": "Delhi NCR" },
+    "holdingsData": { "loanType": "PERSONAL", "outstandingAmount": 300000, "sanctionedAmount": 300000, "emiAmount": 9500 }
+  },
+  {
+    "sourceSystem": "MUTUAL_FUNDS",
+    "sourceCustomerId": "MF_203",
+    "rawAttributes": { "fullName": "Amitabh Roy", "pan": "NOT_PROVIDED", "mobile": "9830022344", "email": "roy.office@consultant.in", "city": "Kolkata" },
+    "holdingsData": { "totalNavValue": 450000, "schemeCount": 2, "sipActive": false }
+  },
+  {
+    "sourceSystem": "INSURANCE",
+    "sourceCustomerId": "IN_204",
+    "rawAttributes": { "fullName": "Amitava Ray", "pan": "NOT_PROVIDED", "mobile": "9830022344", "email": "amitabh.roy@gmail.com", "city": "Kolkata" },
+    "holdingsData": { "policyType": "TERM", "sumAssured": 2500000, "status": "ACTIVE" }
+  },
+  {
+    "sourceSystem": "EQUITY",
+    "sourceCustomerId": "EQ_205",
+    "rawAttributes": { "fullName": "Suresh Patel", "pan": "NOT_PROVIDED", "mobile": "9879033455", "email": "patel.traders@yahoo.com", "city": "Surat" },
+    "holdingsData": { "portfolioValue": 580000, "activeHoldings": ["L&T"] }
+  },
+  {
+    "sourceSystem": "LOANS",
+    "sourceCustomerId": "LN_206",
+    "rawAttributes": { "fullName": "Ramesh Patel", "pan": "NOT_PROVIDED", "mobile": "9879033455", "email": "patel.traders@yahoo.com", "city": "Surat" },
+    "holdingsData": { "loanType": "BUSINESS", "outstandingAmount": 1200000, "sanctionedAmount": 1500000, "emiAmount": 38000 }
+  },
+  {
+    "sourceSystem": "MUTUAL_FUNDS",
+    "sourceCustomerId": "MF_207",
+    "rawAttributes": { "fullName": "Sunita Kulkarni", "pan": "NOT_PROVIDED", "mobile": "9823044566", "email": "sunita.kulkarni@bankcorp.com", "city": "Pune" },
+    "holdingsData": { "totalNavValue": 680000, "schemeCount": 3, "sipActive": true }
+  },
+  {
+    "sourceSystem": "INSURANCE",
+    "sourceCustomerId": "IN_208",
+    "rawAttributes": { "fullName": "Sunita R. Kulkarni", "pan": "NOT_PROVIDED", "mobile": "9823044566", "email": "skulkarni.pune@gmail.com", "city": "Pune" },
+    "holdingsData": { "policyType": "HEALTH", "sumAssured": 1000000, "status": "ACTIVE" }
+  },
+  {
+    "sourceSystem": "EQUITY",
+    "sourceCustomerId": "EQ_209",
+    "rawAttributes": { "fullName": "Naveen Reddy", "pan": "NOT_PROVIDED", "mobile": "9848055677", "email": "naveen.reddy@hyderabad.in", "city": "Hyderabad" },
+    "holdingsData": { "portfolioValue": 920000, "activeHoldings": ["DRREDDY"] }
+  },
+  {
+    "sourceSystem": "LOANS",
+    "sourceCustomerId": "LN_210",
+    "rawAttributes": { "fullName": "Praveen Reddy", "pan": "NOT_PROVIDED", "mobile": "9848055677", "email": "reddy.brothers@gmail.com", "city": "Hyderabad" },
+    "holdingsData": { "loanType": "HOME", "outstandingAmount": 2800000, "sanctionedAmount": 3500000, "emiAmount": 29000 }
+  },
+  {
+    "sourceSystem": "MUTUAL_FUNDS",
+    "sourceCustomerId": "MF_211",
+    "rawAttributes": { "fullName": "Kavita Menon", "pan": "NOT_PROVIDED", "mobile": "9846066788", "email": "kavita.m@logistics.com", "city": "Kochi" },
+    "holdingsData": { "totalNavValue": 540000, "schemeCount": 2, "sipActive": true }
+  },
+  {
+    "sourceSystem": "INSURANCE",
+    "sourceCustomerId": "IN_212",
+    "rawAttributes": { "fullName": "Kavitha Menon", "pan": "NOT_PROVIDED", "mobile": "9846066788", "email": "menon.kavita@yahoo.in", "city": "Kochi" },
+    "holdingsData": { "policyType": "LIFE", "sumAssured": 2000000, "status": "ACTIVE" }
+  },
+  {
+    "sourceSystem": "EQUITY",
+    "sourceCustomerId": "EQ_213",
+    "rawAttributes": { "fullName": "Manish Gupta", "pan": "NOT_PROVIDED", "mobile": "9818077899", "email": "m.gupta@delhienterprises.com", "city": "Delhi NCR" },
+    "holdingsData": { "portfolioValue": 740000, "activeHoldings": ["MARUTI"] }
+  },
+  {
+    "sourceSystem": "LOANS",
+    "sourceCustomerId": "LN_214",
+    "rawAttributes": { "fullName": "Monish Gupta", "pan": "NOT_PROVIDED", "mobile": "9818077899", "email": "gupta.family.trust@gmail.com", "city": "Delhi NCR" },
+    "holdingsData": { "loanType": "AUTO", "outstandingAmount": 420000, "sanctionedAmount": 700000, "emiAmount": 15000 }
+  },
+  {
+    "sourceSystem": "MUTUAL_FUNDS",
+    "sourceCustomerId": "MF_215",
+    "rawAttributes": { "fullName": "Deepa Nair", "pan": "NOT_PROVIDED", "mobile": "9895088900", "email": "deepa.nair@cochinexports.in", "city": "Thiruvananthapuram" },
+    "holdingsData": { "totalNavValue": 810000, "schemeCount": 4, "sipActive": true }
+  },
+  {
+    "sourceSystem": "INSURANCE",
+    "sourceCustomerId": "IN_216",
+    "rawAttributes": { "fullName": "Deepika Nair", "pan": "NOT_PROVIDED", "mobile": "9895088900", "email": "deepanair@gmail.com", "city": "Thiruvananthapuram" },
+    "holdingsData": { "policyType": "TERM", "sumAssured": 4000000, "status": "ACTIVE" }
+  },
+  {
+    "sourceSystem": "EQUITY",
+    "sourceCustomerId": "EQ_217",
+    "rawAttributes": { "fullName": "Rajesh Singhania", "pan": "NOT_PROVIDED", "mobile": "9831099011", "email": "rajesh.s@singhaniaholdings.com", "city": "Kolkata" },
+    "holdingsData": { "portfolioValue": 1650000, "activeHoldings": ["TITAN", "BHARTIARTL"] }
+  },
+  {
+    "sourceSystem": "LOANS",
+    "sourceCustomerId": "LN_218",
+    "rawAttributes": { "fullName": "Rakesh Singhania", "pan": "NOT_PROVIDED", "mobile": "9831099011", "email": "singhania.group@yahoo.com", "city": "Kolkata" },
+    "holdingsData": { "loanType": "HOME", "outstandingAmount": 5200000, "sanctionedAmount": 7000000, "emiAmount": 49000 }
+  },
+  {
+    "sourceSystem": "MUTUAL_FUNDS",
+    "sourceCustomerId": "MF_219",
+    "rawAttributes": { "fullName": "Pooja Banerjee", "pan": "NOT_PROVIDED", "mobile": "9830010122", "email": "p.banerjee@kolkatamedia.in", "city": "Kolkata" },
+    "holdingsData": { "totalNavValue": 390000, "schemeCount": 2, "sipActive": false }
+  },
+  {
+    "sourceSystem": "INSURANCE",
+    "sourceCustomerId": "IN_220",
+    "rawAttributes": { "fullName": "Pujashree Banerjee", "pan": "NOT_PROVIDED", "mobile": "9830010122", "email": "banerjee.pujashree@gmail.com", "city": "Kolkata" },
+    "holdingsData": { "policyType": "HEALTH", "sumAssured": 750000, "status": "ACTIVE" }
+  }
+]

@@ -438,11 +438,32 @@ export const processIdentityResolution = async (customSourceRecords = null) => {
       let matchType = "PROBABILISTIC";
       const breakdown = [];
 
-      // Hard / Deterministic PAN Match check
+      // Hard / Deterministic PAN Match check with Name and Email Discrepancy Evaluation
       if (recA.cleanPan && recB.cleanPan && recA.cleanPan === recB.cleanPan) {
-        matchConfidence = 1.0;
-        matchType = "DETERMINISTIC";
-        breakdown.push({ attribute: "pan", score: 1.0, weight: weights.pan, algorithm: "ExactMatch" });
+        const nameScore = (recA.cleanName && recB.cleanName) ? tokenSetRatio(recA.cleanName, recB.cleanName) : 1.0;
+        const emailScore = (recA.cleanEmail && recB.cleanEmail) ? (recA.cleanEmail === recB.cleanEmail ? 1.0 : jaroWinklerSimilarity(recA.cleanEmail, recB.cleanEmail)) : 1.0;
+
+        const isNameDifferent = recA.cleanName && recB.cleanName && (recA.cleanName !== recB.cleanName || nameScore < 0.85);
+        const isEmailDifferent = recA.cleanEmail && recB.cleanEmail && (recA.cleanEmail !== recB.cleanEmail || emailScore < 0.85);
+
+        // Put for review when PAN is identical but Name and/or Email are different
+        if (isNameDifferent && isEmailDifferent) {
+          matchConfidence = 0.70;
+          matchType = "REVIEW_REQUIRED";
+          breakdown.push({ attribute: "pan", score: 1.0, weight: weights.pan, algorithm: "ExactMatch" });
+          breakdown.push({ attribute: "fullName", score: nameScore, weight: weights.fullName, algorithm: "TokenSetRatio" });
+          breakdown.push({ attribute: "email", score: emailScore, weight: weights.email, algorithm: "Exact/JaroWinkler" });
+        } else if (isNameDifferent || isEmailDifferent) {
+          matchConfidence = 0.75;
+          matchType = "REVIEW_REQUIRED";
+          breakdown.push({ attribute: "pan", score: 1.0, weight: weights.pan, algorithm: "ExactMatch" });
+          breakdown.push({ attribute: "fullName", score: nameScore, weight: weights.fullName, algorithm: "TokenSetRatio" });
+          breakdown.push({ attribute: "email", score: emailScore, weight: weights.email, algorithm: "Exact/JaroWinkler" });
+        } else {
+          matchConfidence = 1.0;
+          matchType = "DETERMINISTIC";
+          breakdown.push({ attribute: "pan", score: 1.0, weight: weights.pan, algorithm: "ExactMatch" });
+        }
       } else {
         // Probabilistic Matching
         let weightSum = 0;
@@ -523,6 +544,11 @@ export const processIdentityResolution = async (customSourceRecords = null) => {
           });
         }
 
+        const hasPanMatch = recA.cleanPan && recB.cleanPan && recA.cleanPan === recB.cleanPan;
+        const ambiguityReason = hasPanMatch
+          ? `Identical PAN '${recA.cleanPan}' detected, but Name and Email differ across source systems (${(matchConfidence * 100).toFixed(1)}% match).`
+          : `Borderline similarity score (${(matchConfidence * 100).toFixed(1)}%) requires manual verification.`;
+
         reviewQueueItems.push({
           reviewId: `REV-${recA.sourceCustomerId}-${recB.sourceCustomerId}-${Date.now()}`,
           sourceRecordA: {
@@ -539,7 +565,7 @@ export const processIdentityResolution = async (customSourceRecords = null) => {
           },
           confidenceScore: matchConfidence,
           conflicts,
-          ambiguityReason: `Borderline similarity score (${(matchConfidence * 100).toFixed(1)}%) requires manual verification.`,
+          ambiguityReason,
           status: "PENDING"
         });
       }

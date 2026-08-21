@@ -49,8 +49,11 @@ export function AiCard({ goldenCustomerId, customer = {} }) {
     }
   };
 
+  // Reset insight state when customer changes so user clicks "Generate" explicitly
   useEffect(() => {
-    fetchAiInsight();
+    setInsight(null);
+    setPitched(false);
+    setError(null);
   }, [goldenCustomerId]);
 
   const handlePitch = () => {
@@ -74,7 +77,7 @@ export function AiCard({ goldenCustomerId, customer = {} }) {
       }} />
 
       {/* Header Row */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: insight ? 16 : 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div style={{
             width: 34, height: 34, borderRadius: 8,
@@ -87,9 +90,8 @@ export function AiCard({ goldenCustomerId, customer = {} }) {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--ink-900)', margin: 0 }}>
-                Gemini AI Cross-Sell Solution
+                AI-Powered Cross-Sell Solution
               </h3>
-              <Chip tone="gold" icon={Zap}>Gemini-2.5 Flash</Chip>
             </div>
             <p style={{ fontSize: 12, color: 'var(--ink-500)', margin: '2px 0 0 0' }}>
               Real-time portfolio vulnerability &amp; next-best-opportunity engine
@@ -97,33 +99,35 @@ export function AiCard({ goldenCustomerId, customer = {} }) {
           </div>
         </div>
 
-        <button
-          onClick={fetchAiInsight}
-          disabled={loading}
-          title="Re-run Gemini AI Analysis"
-          style={{
-            display: 'flex', alignItems: 'center', gap: 6,
-            padding: '6px 12px', borderRadius: 6,
-            fontSize: 12, fontWeight: 600,
-            border: '1px solid var(--line-300)',
-            background: 'var(--surface)', color: 'var(--ink-700)',
-            cursor: loading ? 'not-allowed' : 'pointer',
-            transition: 'all 0.15s ease',
-          }}
-        >
-          <RefreshCw size={13} className={loading ? 'spin' : ''} />
-          <span>{loading ? 'Analyzing...' : 'Refresh AI'}</span>
-        </button>
+        {insight && (
+          <button
+            onClick={fetchAiInsight}
+            disabled={loading}
+            title="Re-run AI Analysis"
+            style={{
+              display: 'flex', alignItems: 'center', gap: 6,
+              padding: '6px 12px', borderRadius: 6,
+              fontSize: 12, fontWeight: 600,
+              border: '1px solid var(--line-300)',
+              background: 'var(--surface)', color: 'var(--ink-700)',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              transition: 'all 0.15s ease',
+            }}
+          >
+            <RefreshCw size={13} className={loading ? 'spin' : ''} />
+            <span>{loading ? 'Analyzing...' : 'Re-generate'}</span>
+          </button>
+        )}
       </div>
 
       {/* Body Content */}
       {loading ? (
         <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--brand-700)', fontSize: 13.5, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
           <Sparkles size={16} className="spin" />
-          <span>Generating AI pitch solution using Gemini LLM...</span>
+          <span>Generating AI pitch solution using LLM engine...</span>
         </div>
       ) : insight ? (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           {/* Solution Pitch Title Box */}
           <div style={{
             padding: '14px 18px',
@@ -160,11 +164,7 @@ export function AiCard({ goldenCustomerId, customer = {} }) {
           </div>
 
           {/* Action Bar */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 4 }}>
-            <span style={{ fontSize: 12, color: 'var(--ink-400)' }}>
-              {insight.isFallback ? '⚡ Rule-based fallback active' : '🤖 Generated via Gemini GenAI'}
-            </span>
-
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginTop: 4 }}>
             <Button
               variant={pitched ? 'success' : 'primary'}
               icon={pitched ? Check : ArrowRight}
@@ -176,8 +176,34 @@ export function AiCard({ goldenCustomerId, customer = {} }) {
           </div>
         </div>
       ) : (
-        <div style={{ padding: '16px 0', textAlign: 'center', color: 'var(--ink-500)', fontSize: 13 }}>
-          Click Refresh AI to generate recommendations for this customer.
+        <div style={{
+          marginTop: 16,
+          padding: '18px 20px',
+          background: 'var(--surface)',
+          borderRadius: 8,
+          border: '1px dashed var(--brand-200)',
+          display: 'flex',
+          justify: 'space-between',
+          alignItems: 'center',
+          gap: 16,
+        }}>
+          <div>
+            <h4 style={{ fontSize: 14, fontWeight: 700, color: 'var(--ink-900)', margin: 0 }}>
+              Generate AI Recommendation
+            </h4>
+            <p style={{ fontSize: 12, color: 'var(--ink-500)', margin: '2px 0 0 0' }}>
+              Run deep portfolio gap analysis to generate pitch lead &amp; strategic rationale.
+            </p>
+          </div>
+
+          <Button
+            variant="primary"
+            icon={Sparkles}
+            onClick={fetchAiInsight}
+            style={{ padding: '8px 18px', fontSize: 13 }}
+          >
+            Generate AI Solution
+          </Button>
         </div>
       )}
     </div>

@@ -39,6 +39,31 @@ function MainAppShell() {
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
+  // Audit Logs State
+  const [auditLogs, setAuditLogs] = useState([]);
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    axiosClient
+      .get('/audit/get-audit-logs')
+      .then((res) => {
+        const rawLogs = res.data?.data?.logs || [];
+        const formatted = rawLogs.map((log) => ({
+          id: log.auditId || log._id,
+          actionType: log.action || 'AUDIT_LOG',
+          actor: log.performedBy?.userName || log.performedBy?.userId || 'System',
+          details: log.reason || `${log.action} performed on ${log.targetEntity?.entityType || 'record'}`,
+          targetId: log.targetEntity?.entityId || null,
+          timestamp: new Date(log.timestamp || log.createdAt).toLocaleString('en-IN'),
+        }));
+        setAuditLogs(formatted);
+      })
+      .catch((err) => {
+        console.warn('Could not fetch audit logs:', err.message);
+      });
+  }, [isAuthenticated, isAuditModalOpen]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -132,7 +157,7 @@ function MainAppShell() {
                 currentUser={currentUser}
                 theme={theme}
                 showMasked={showMasked}
-                auditCount={0}
+                auditCount={auditLogs.length}
                 onToggleTheme={toggleTheme}
                 onToggleMasking={toggleMasking}
                 onOpenAudit={() => setIsAuditModalOpen(true)}
@@ -229,7 +254,7 @@ function MainAppShell() {
       <AuditLogModal
         isOpen={isAuditModalOpen}
         onClose={() => setIsAuditModalOpen(false)}
-        logs={[]}
+        logs={auditLogs}
       />
 
       {/* Privileged Portal Login Modal */}
